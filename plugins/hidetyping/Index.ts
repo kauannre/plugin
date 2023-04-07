@@ -3,7 +3,6 @@ import { before } from "vendetta/utils/patcher";
 
 export default {
 		onLoad: function () {
-			const { patcher } = require('vendetta/utils');
 			
 
 
