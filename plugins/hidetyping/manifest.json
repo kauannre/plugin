@@ -2,6 +2,6 @@
 	"name": "hide typing",
 	"description": "esconder digitando",
 	"authors": [{ "name": "Kauan", "id": "879794116937007174" }],
-	"main": "index.ts",
+	"main": "index.js",
 	"vendetta": { "icon": "ic_application_command_24px" }
 }
