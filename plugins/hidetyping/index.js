@@ -7,4 +7,5 @@ export default {
 		patcher.before(typing, "startTyping", ctx => {
             ctx.result = null
         });
-        }};
+        },
+};
