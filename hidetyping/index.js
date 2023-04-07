@@ -1,1 +1,1 @@
-(function(t,e,n){"use strict";var r={onLoad:function(){const u=e.getByProps("startTyping");n.before(u,"startTyping",function(o){o.result=null})}};return t.default=r,Object.defineProperty(t,"__esModule",{value:!0}),t})({},metro,patcher);
+(function(t,e,n){"use strict";var r={onLoad:function(){const u=e.findByProps("startTyping");n.before(u,"startTyping",function(i){i.result=null})}};return t.default=r,Object.defineProperty(t,"__esModule",{value:!0}),t})({},metro,patcher);
