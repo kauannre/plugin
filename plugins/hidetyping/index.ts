@@ -1,4 +1,4 @@
-import { getByProps } from 'vendetta/metro';
+import { findByProps } from 'vendetta/metro';
 import { before } from "vendetta/utils/patcher";
 
 export default {
@@ -6,7 +6,7 @@ export default {
 			
 
 
-const typing = getByProps("startTyping");
+const typing = findByProps("startTyping");
 
         before(typing, "startTyping", ctx => {
             ctx.result = null
