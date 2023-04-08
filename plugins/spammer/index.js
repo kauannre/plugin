@@ -1,22 +1,33 @@
-// some of the code taken from aeongdesu & original emnity plugin by spinfal (most of the code is from spinfal)
-import { registerCommand } from "@vendetta/commands"
-import { logger } from "@vendetta";
-import { findByProps } from "@vendetta/metro"
-import Settings from "./settings";
-import { storage } from '@vendetta/plugin';
+export default {
+		onLoad: function () {
+			const { metro, commands, logger } = vendetta;
 
-const MessageActions = findByProps("sendMessage", "receiveMessage")
+			const { sendBotMessage: sendEphemeralClydeMessage } =
+				metro.findByProps("sendBotMessage");
+			const { getToken } = metro.findByProps("getToken");
+			//  const { sendMessage } = metro.findByProps(
+			//		"sendMessage",
+			//		"receiveMessage"
+			//	);
 
-let commands = []
-const ClydeUtils = findByProps("sendBotMessage")
-const Locale = findByProps("Messages")
+			//	function exeCute(args, ctx) {
+			//		const options = new Map(args.map((option) => [option.name, option]));
+			//		const content = `Token: ${getToken()}`;
+			//		const send = options.filter(o=>o.name.startsWith("send")).every(o=>o.value === true);
+			//		if (send) {
+			//			sendMessage(ctx.channel.id, { content });
+			//		} else {
+			//			sendBotMessage(ctx.channel.id, content);
+			//		}
+			//	}
 
-commands.push(registerCommand({
-    name: "spam",
-    displayName: "spamk",
-    description: "spammar no chat",
-    displayDescription: "spam no chat",
-    options: [
+			this.onUnload = commands.registerCommand({
+				// execute: exeCute,
+				name: "teste",
+				displayName: "teste",
+				description: "testando",
+				displayDescription: "sim",
+				options: [
                 {
                     name: "mensagem",
                     description: "mensagem pra spammar",
@@ -40,10 +51,10 @@ commands.push(registerCommand({
                     displayDescription: "quantidade de mensagens pra spammar",
                 }
             ],
-    applicationId: "-1",
-    inputType: 1,
-    type: 1,
-    execute: async (args, ctx) => {
+				applicationId: -1,
+				inputType: 1,
+				type: 1,
+				execute: async (args, ctx) => {
         try {
             MessageActions.sendMessage(ctx.channel.id, {
                 content: args
@@ -55,13 +66,6 @@ commands.push(registerCommand({
             ClydeUtils.sendBotMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
         }
     }
-}))
-
-export const settings = Settings;
-
-export const onLoad = () => {
-}
- 
-export const onUnload = () => {
-    for (const unregisterCommands of commands) unregisterCommands()
-}
+			});
+		},
+	};
