@@ -85,7 +85,8 @@ export default {
         try {
           let idfrom = args.find((sla) => sla.name == "idfrom").value;
           let idto = args.find((sla) => sla.name == "idto").value;
-
+          
+          const sleep = (t) => new Promise((s) => setTimeout(s, t));
           const channels = await pegarcanais(idfrom);
           let parentChannels = channels
             .filter((channel) => channel.type === 4)
