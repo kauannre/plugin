@@ -64,17 +64,17 @@ export default {
       options: [
                 {
           name: "idfrom",
-          description: "idfrom",
+          description: "id do servidor que vai clonar",
           type: 3,
           required: true,
-          displayName: "id of server que voce quer clonar",
+          displayName: "idfrom",
           displayDescription: "id of server que voce quer clonar",
         }, {
           name: "idto",
-          description: "idto",
+          description: "id to server que voce vai colar o clone",
           type: 3,
           required: true,
-          displayName: "id to server que voce vai colar o clone",
+          displayName: "idto",
           displayDescription: "id to server que voce vai colar o clone",
         }
       ],
