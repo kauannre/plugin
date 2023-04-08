@@ -5,22 +5,6 @@ export default {
 			const { sendBotMessage: sendEphemeralClydeMessage } =
 				metro.findByProps("sendBotMessage");
 			const MessageActions = metro.findByProps("sendMessage", "receiveMessage")
-			//const { getToken } = metro.findByProps("getToken");
-			//  const { sendMessage } = metro.findByProps(
-			//		"sendMessage",
-			//		"receiveMessage"
-			//	);
-
-			//	function exeCute(args, ctx) {
-			//		const options = new Map(args.map((option) => [option.name, option]));
-			//		const content = `Token: ${getToken()}`;
-			//		const send = options.filter(o=>o.name.startsWith("send")).every(o=>o.value === true);
-			//		if (send) {
-			//			sendMessage(ctx.channel.id, { content });
-			//		} else {
-			//			sendBotMessage(ctx.channel.id, content);
-			//		}
-			//	}
 /*
 [
   {
@@ -44,10 +28,10 @@ export default {
 
 			this.onUnload = commands.registerCommand({
 				// execute: exeCute,
-				name: "teste",
-				displayName: "teste",
-				description: "testando",
-				displayDescription: "sim",
+				name: "spam",
+				displayName: "spam",
+				description: "spammar mensages no chat",
+				displayDescription: "spamar msg no chat(usando sua acc)",
 				options: [
                 {
                     name: "mensagem",
@@ -55,7 +39,7 @@ export default {
                     type: 3,
                     required: true,
                     displayName: "mensagem",
-                    displayDescription: "mensagem pra mandar",
+                    displayDescription: "mensagem pra spammar",
                 }, {
                     name: "id",
                     description: "id da pessoa ou chat",
@@ -70,8 +54,15 @@ export default {
                     required: true,
                     displayName: "quantidade",
                     displayDescription: "quantidade de mensagens pra spammar",
-                }
-            ],
+                }, {
+        name: "clyde",
+        displayName: "clyde",
+        description: "usar o clyde pra enviar as mensagens",
+        displayDescription: "usar o clyde pra enviar as mensagens",
+        required: false,
+        type: 5
+                  }
+                 ],
 				applicationId: -1,
 				inputType: 1,
 				type: 1,
@@ -79,6 +70,7 @@ export default {
         try {
             let mensagem = args.find((sla) => sla.name == "mensagem");
             let quantidade = args.find((sla) => sla.name == "quantidade");
+            let clyde = args.find((sla) => sla.name == "clyde");
             
             let id = args.find((sla) => sla.name == "id");
             if(id) {
@@ -88,9 +80,13 @@ export default {
             }
            
              for(let i = 0; i < quantidade.value; i++) {
+             if(!clyde) {
 await MessageActions.sendMessage(id, {
                 content: mensagem.value
             });
+            } else {
+            sendEphemeralClydeMessage(id, mensagem.value)
+            }
 };
 
         
