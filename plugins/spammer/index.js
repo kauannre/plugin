@@ -56,14 +56,14 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            MessageActions.sendMessage(ctx.channel.id, {
+            sendBotMessage(ctx.channel.id, {
                 content: `${JSON.stringify(args, null, 2)}`
             })
             
 
         } catch (err) {
             logger.log(err);
-            MessageActions.sendBotMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
+            sendBotMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
         }
     }
 			});
