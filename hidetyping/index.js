@@ -1,1 +1,0 @@
-(function(t){"use strict";var e={onLoad:function(){const{metro:n,utils:i,patcher:r}=vendetta;n.findByProps("startTyping"),r.before(typing,"startTyping",function(u){u.result=null})}};return t.default=e,Object.defineProperty(t,"__esModule",{value:!0}),t})({});
