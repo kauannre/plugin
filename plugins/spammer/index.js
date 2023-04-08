@@ -1,3 +1,5 @@
+//eu usei alguns plugins como base pra criar esse mas eu fiz tudo sozinho antes que alguém fale que kibei de gringo.
+
 export default {
 		onLoad: function () {
 			const { metro, commands, logger } = vendetta;
@@ -90,7 +92,7 @@ await MessageActions.sendMessage(id, {
 };
 
         
-            sendEphemeralClydeMessage(ctx.channel.id, `${JSON.stringify(args, null, 2)}`)
+            sendEphemeralClydeMessage(ctx.channel.id, `pronto!`)
             
 
         } catch (err) {
