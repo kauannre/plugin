@@ -77,21 +77,21 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            mensagem = args.find((sla) => sla.name == "mensagem").value
-            quantidade = args.find((sla) => sla.name == "quantidade").value
+            let mensagem = args.find((sla) => sla.name == "mensagem");
+            let quantidade = args.find((sla) => sla.name == "quantidade");
             
-            id = args.find((sla) => sla.name == "id")
+            let id = args.find((sla) => sla.name == "id");
             if(id) {
             id = id.value
             } else {
             id = ctx.channel.id
             }
            
-             for(let i = 0; i < quantidade; i++) {
+             for(let i = 0; i < quantidade.value; i++) {
 await MessageActions.sendMessage(id, {
-                content: mensagem
-            })
-}
+                content: mensagem.value
+            });
+};
 
         
             sendEphemeralClydeMessage(ctx.channel.id, `${JSON.stringify(args, null, 2)}`)
@@ -99,7 +99,7 @@ await MessageActions.sendMessage(id, {
 
         } catch (err) {
             logger.log(err);
-            sendEphemeralClydeMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
+            sendEphemeralClydeMessage(ctx.channel.id, err)
         }
     }
 			});
