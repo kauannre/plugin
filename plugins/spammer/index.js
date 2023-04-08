@@ -56,7 +56,7 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            MessageActions.sendMessage(ctx.channel.id, {
+            sendEphemeralClydeMessage.sendMessage(ctx.channel.id, {
                 content: args
             })
             
