@@ -56,9 +56,7 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            sendEphemeralClydeMessage(ctx.channel.id, {
-                content: `${JSON.stringify(args, null, 2)}`
-            })
+            sendEphemeralClydeMessage(ctx.channel.id, `${JSON.stringify(args, null, 2)}`)
             
 
         } catch (err) {
