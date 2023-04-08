@@ -33,7 +33,7 @@ export default {
 				name: "spam",
 				displayName: "spam",
 				description: "spammar mensages no chat",
-				displayDescription: "spamar msg no chat(usando sua acc)",
+				displayDescription: "spamar msg no chat(usando sua acc e clyde)",
 				options: [
                 {
                     name: "mensagem",
