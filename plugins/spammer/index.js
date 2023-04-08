@@ -56,16 +56,19 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            sendEphemeralClydeMessage.sendMessage(ctx.channel.id, {
-                content: args
+            MessageActions.sendMessage(ctx.channel.id, {
+                content: `${JSON.stringify(args, null, 2)}`
             })
             
 
         } catch (err) {
             logger.log(err);
-            ClydeUtils.sendBotMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
+            MessageActions.sendBotMessage(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺")
         }
     }
 			});
 		},
 	};
+	
+
+
