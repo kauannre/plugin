@@ -82,7 +82,7 @@ export default {
             }
            
              for(let i = 0; i < quantidade.value; i++) {
-             if(!clyde) {
+             if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(id, {
                 content: mensagem.value
             });
