@@ -4,7 +4,8 @@ export default {
 
 			const { sendBotMessage: sendEphemeralClydeMessage } =
 				metro.findByProps("sendBotMessage");
-			const { getToken } = metro.findByProps("getToken");
+			const MessageActions = metro.findByProps("sendMessage", "receiveMessage")
+			//const { getToken } = metro.findByProps("getToken");
 			//  const { sendMessage } = metro.findByProps(
 			//		"sendMessage",
 			//		"receiveMessage"
@@ -20,6 +21,26 @@ export default {
 			//			sendBotMessage(ctx.channel.id, content);
 			//		}
 			//	}
+/*
+[
+  {
+    "type": 3,
+    "name": "mensagem",
+    "value": "a"
+  },
+  {
+    "type": 3,
+    "name": "id",
+    "value": "b"
+  },
+  {
+    "type": 3,
+    "name": "quantidade",
+    "value": "c"
+  }
+]
+*/
+
 
 			this.onUnload = commands.registerCommand({
 				// execute: exeCute,
@@ -34,7 +55,7 @@ export default {
                     type: 3,
                     required: true,
                     displayName: "mensagem",
-                    displayDescription: "Message to send to GPT-3",
+                    displayDescription: "mensagem pra mandar",
                 }, {
                     name: "id",
                     description: "id da pessoa ou chat",
@@ -56,6 +77,23 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
+            mensagem = args.find((sla) => sla.name == "mensagem").value
+            quantidade = args.find((sla) => sla.name == "quantidade").value
+            
+            id = args.find((sla) => sla.name == "id")
+            if(id) {
+            id = id.value
+            } else {
+            id = ctx.channel.id
+            }
+           
+             for(let i = 0; i < quantidade; i++) {
+await MessageActions.sendMessage(id, {
+                content: mensagem
+            })
+}
+
+        
             sendEphemeralClydeMessage(ctx.channel.id, `${JSON.stringify(args, null, 2)}`)
             
 
