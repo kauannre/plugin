@@ -1,6 +1,6 @@
 {
-    "name": "ler 500 caracteres",
-    "description": "fazer o dc ler apenas os 500 primeiros caracteres",
+    "name": "remover emojis",
+    "description": "remover todos os tipos de emojis substituindo eles pra um ponto",
     "authors": [
         {
             "name": "Kauan del zap",
