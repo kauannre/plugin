@@ -46,7 +46,7 @@ const changehype = async function (id) {
                 {
                     name: "new",
                     description: "new hypesquad ",
-                    type: 3,
+                    type: 2,
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
