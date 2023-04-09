@@ -42,11 +42,12 @@ const changehype = async function (id) {
 				displayName: "hypesquad",
 				description: "change hypesquad",
 				displayDescription: "change hypesquad",
+                                type: 4,
 				options: [
                 {
                     name: "new",
                     description: "new hypesquad ",
-                    type: 2,
+                    type: 3,
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
