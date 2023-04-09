@@ -32,8 +32,8 @@ const changehype = async function (id) {
   body: JSON.stringify({ house_id: id })
 });
 
-      const resp = await response.json();
-      return resp;
+      //const resp = await response.json();
+      return "pronto";
     }
 
 			this.onUnload = commands.registerCommand({
@@ -50,6 +50,20 @@ const changehype = async function (id) {
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
+                    choices: [
+                 { 
+                   name: "bravery", 
+                   value: 1
+                 }, 
+                 { 
+                   name: "Brilliance", 
+                   value: 2
+                 }, 
+                 { 
+                   name: "Balance", 
+                   value: 3
+                 } 
+           ]
                 }
                  ],
 				applicationId: -1,
@@ -61,9 +75,9 @@ const changehype = async function (id) {
             let newid = null
             if(hypesquadid == "bravery") {
             newid = 1
-            } else if (hypesquadid == "brilliance") {
+            } else if (hypesquadid == "Brilliance") {
             newid = 2
-            } else if (hypesquadid == "balance") {
+            } else if (hypesquadid == "Balance") {
             newid = 3
             } else{
             newid = null
