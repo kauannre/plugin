@@ -19,13 +19,9 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
 /*  if (content.length > 500) {
     content = content.substring(0, 500);
   }*/
-  const regex = /[\p{Emoji}]/gu;
-  if (regex.test(content)) {
-  content = content.replace(regex, '.');
-  }
 
 
-  data.message.content = content;
+  data.message.content = content.replace(/[\p{Emoji}]/gu, '.');
 }));
 
 
