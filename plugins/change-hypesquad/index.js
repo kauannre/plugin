@@ -42,7 +42,6 @@ const changehype = async function (id) {
 				displayName: "hypesquad",
 				description: "change hypesquad",
 				displayDescription: "change hypesquad",
-                                type: 4,
 				options: [
                 {
                     name: "new",
@@ -51,20 +50,6 @@ const changehype = async function (id) {
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
-                    choices: [ 
-                 { 
-                   name: "bravery", 
-                   value: 1
-                 }, 
-                 { 
-                   name: "Brilliance", 
-                   value: 2
-                 }, 
-                 { 
-                   name: "Balance", 
-                   value: 3
-                 } 
-           ]
                 }
                  ],
 				applicationId: -1,
@@ -72,11 +57,27 @@ const changehype = async function (id) {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-            let hypesquadid = args.find((sla) => sla.name == "new").value;
+            let hypesquadid = args.find((sla) => sla.name == "new").value.toLowerCase();
+            newid = null
+            if(hypesquadid == "bravery") {
+            newid = 1
+            } else if (hypesquadid == "brilliance") {
+            newid = 2
+            } else if (hypesquadid == "balance") {
+            newid = 3
+            } else{
+            newid = null
+            }
             
-            await changehype(hypesquadid)
-        
-            sendEphemeralClydeMessage(ctx.channel.id, `done, hypesquad changed!`)
+            if(newid) {
+            await changehype(newid)
+            sendEphemeralClydeMessage(ctx.channel.id, `EN: done, hypesquad changed!\n\nBR: pronto, hypesquad mudado!`)
+            } else {
+            sendEphemeralClydeMessage(ctx.channel.id, `EN this hypesquad does not exist, the allowed ones are:\n\nbravery\nBrilliance\nBalance\n\nBR este hypesquad não existe, os permitidos são:\n\nbravery\nBrilliance\nBalance`)
+            
+            }
+            
+            //sendEphemeralClydeMessage(ctx.channel.id, `done, hypesquad changed!`)
             
 
         } catch (err) {
@@ -88,3 +89,5 @@ const changehype = async function (id) {
 		},
 	};
 	
+
+
