@@ -50,22 +50,6 @@ const changehype = async function (id) {
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
-                    choices: [
-                 { 
-                   name: "bravery", 
-                   value: 1
-                 }, 
-                 { 
-                   name: "Brilliance", 
-                   value: 2
-                 }, 
-                 { 
-                   name: "Balance", 
-                   value: 3
-                 } 
-           ]
-                }
-                 ],
 				applicationId: -1,
 				inputType: 1,
 				type: 1,
@@ -75,9 +59,9 @@ const changehype = async function (id) {
             let newid = null
             if(hypesquadid == "bravery") {
             newid = 1
-            } else if (hypesquadid == "Brilliance") {
+            } else if (hypesquadid == "brilliance") {
             newid = 2
-            } else if (hypesquadid == "Balance") {
+            } else if (hypesquadid == "balance") {
             newid = 3
             } else{
             newid = null
@@ -87,7 +71,7 @@ const changehype = async function (id) {
             await changehype(newid)
             sendEphemeralClydeMessage(ctx.channel.id, `EN: done, hypesquad changed!\n\nBR: pronto, hypesquad mudado!`)
             } else {
-            sendEphemeralClydeMessage(ctx.channel.id, `EN this hypesquad does not exist, the allowed ones are:\n\nbravery\nBrilliance\nBalance\n\nBR este hypesquad não existe, os permitidos são:\n\nbravery\nBrilliance\nBalance`)
+            sendEphemeralClydeMessage(ctx.channel.id, `EN this hypesquad does not exist, the allowed ones are:\n\nbravery or 1\nBrilliance or 2\nBalance or 3\n\nBR este hypesquad não existe, os permitidos são:\n\nbravery ou 1\nBrilliance ou 2\nBalance ou 3`)
             
             }
             
