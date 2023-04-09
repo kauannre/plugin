@@ -50,6 +50,8 @@ const changehype = async function (id) {
                     required: true,
                     displayName: "new",
                     displayDescription: "new hypesquad",
+                }
+                 ],
 				applicationId: -1,
 				inputType: 1,
 				type: 1,
