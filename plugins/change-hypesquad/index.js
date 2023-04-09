@@ -42,7 +42,7 @@ export default {
             }
             
             if(newid) {
-            await api.post({ url: '/hypesquad/online', body: JSON.stringify({ house_id: hypesquadid }))
+            await api.post({ url: '/hypesquad/online', body: JSON.stringify({ house_id: hypesquadid })})
             sendEphemeralClydeMessage(ctx.channel.id, `EN: done, hypesquad changed!\n\nBR: pronto, hypesquad mudado!`)
             } else {
             sendEphemeralClydeMessage(ctx.channel.id, `EN this hypesquad does not exist, the allowed ones are:\n\nbravery or 1\nBrilliance or 2\nBalance or 3\n\nBR este hypesquad não existe, os permitidos são:\n\nbravery ou 1\nBrilliance ou 2\nBalance ou 3`)
