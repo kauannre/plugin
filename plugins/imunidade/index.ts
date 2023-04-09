@@ -16,9 +16,9 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
   //content = content.replace(/oi/g, "teste");
 
   // Check if content length is greater than 1000
- // if (content.length > 500) {
-   // content = content.substring(0, 500);
- // }
+/*  if (content.length > 500) {
+    content = content.substring(0, 500);
+  }*/
 
   data.message.content = content;
 }));
@@ -34,9 +34,9 @@ patches.push(after("generate", RowManager.prototype, ([data], row) => {
 
   // Replace "oi2" with "teste2" in content
   const newContent = content.map((c) => {
-  if (c.content.length > 500) {
-    return { type: "text", content: "trava" }; ;
-  }
+    if (c.type === "text" && content.length > 500) {
+      return { type: "text", content: "imunidade" };
+    }
     return c;
   });
   row.message.content = newContent;
