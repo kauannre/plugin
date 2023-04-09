@@ -1,5 +1,6 @@
 # Vendetta Plugins
 plugins feitos pelo kauan 
+
 [Spammer](https://kauannre.github.io/plugin/spammer/) 
 
 [Change hypesquad](https://kauannre.github.io/plugin/change-hypesquad/)
