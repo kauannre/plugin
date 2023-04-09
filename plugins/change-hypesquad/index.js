@@ -58,7 +58,7 @@ const changehype = async function (id) {
 				execute: async (args, ctx) => {
         try {
             let hypesquadid = args.find((sla) => sla.name == "new").value.toLowerCase();
-            newid = null
+            let newid = null
             if(hypesquadid == "bravery") {
             newid = 1
             } else if (hypesquadid == "brilliance") {
