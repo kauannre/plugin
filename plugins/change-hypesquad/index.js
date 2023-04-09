@@ -59,11 +59,11 @@ const changehype = async function (id) {
         try {
             let hypesquadid = args.find((sla) => sla.name == "new").value.toLowerCase();
             let newid = null
-            if(hypesquadid == "bravery") {
+            if(hypesquadid == "bravery" || hypesquadid == "1") {
             newid = 1
-            } else if (hypesquadid == "brilliance") {
+            } else if (hypesquadid == "brilliance" || hypesquadid == "2") {
             newid = 2
-            } else if (hypesquadid == "balance") {
+            } else if (hypesquadid == "balance" || hypesquadid == "3" ) {
             newid = 3
             } else{
             newid = null
