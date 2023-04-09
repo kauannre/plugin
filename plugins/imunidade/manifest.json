@@ -1,6 +1,6 @@
 {
-    "name": "imunidade",
-    "description": "imunidade a travas, em teste.",
+    "name": "ler 500 caracteres",
+    "description": "fazer o dc ler apenas os 500 primeiros caracteres",
     "authors": [
         {
             "name": "Kauan del zap",
