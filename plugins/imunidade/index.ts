@@ -16,16 +16,16 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
   //content = content.replace(/oi/g, "teste");
 
   // Check if content length is greater than 1000
-/*  if (content.length > 500) {
+  if (content.length > 500) {
     content = content.substring(0, 500);
-  }*/
+  }
 
   data.message.content = content;
 }));
 
 
 
-
+/*
 patches.push(after("generate", RowManager.prototype, ([data], row) => {
   if (data.rowType !== 1) return;
 
@@ -41,5 +41,5 @@ patches.push(after("generate", RowManager.prototype, ([data], row) => {
   });
   row.message.content = newContent;
 }));
-
+*/
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
