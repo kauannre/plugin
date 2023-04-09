@@ -34,8 +34,8 @@ patches.push(after("generate", RowManager.prototype, ([data], row) => {
 
   // Replace "oi2" with "teste2" in content
   const newContent = content.map((c) => {
-  if (content.length > 500) {
-    return { type: "text", content: c.content.substring(0, 500) }; ;
+  if (c.content.length > 500) {
+    return { type: "text", content: "trava" }; ;
   }
     return c;
   });
