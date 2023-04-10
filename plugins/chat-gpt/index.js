@@ -11,7 +11,7 @@ const req = async function (msg) {
   const request = {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer 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',
+      'Authorization': 'Bearer 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',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -70,10 +70,10 @@ const req = async function (msg) {
            
              if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
-                content: resposta
+                content: resposta.choices[0].message.content.replace(/^[ \t]*\r?\n/gm, "");
             });
             } else {
-            await sendEphemeralClydeMessage(ctx.channel.id, resposta)
+            await sendEphemeralClydeMessage(ctx.channel.id, resposta.choices[0].message.content..replace(/^[ \t]*\r?\n/gm, ""))
             }
           //  await sendEphemeralClydeMessage(ctx.channel.id, "pronto")
 
