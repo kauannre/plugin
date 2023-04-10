@@ -16,13 +16,10 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
   //content = content.replace(/oi/g, "teste");
 
   // Check if content length is greater than 1000
-/*  if (content.length > 500) {
+  if (content.length > 500) {
     content = content.substring(0, 500);
-  }*/
-  const regex = /^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]+$/u;
-  if (regex.test(content)) {
-  content = content.replace(regex, '.');
   }
+  
 
 
   data.message.content = content;
