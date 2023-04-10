@@ -14,7 +14,7 @@ function parseResponse(responseBody) {
     text = responseBody.choices[0].message.content;
   } catch (e) {}
   
-  return text.replaceAll(/^[ \t]*\r?\n/gm, '');
+  return text;
 }
 
 
