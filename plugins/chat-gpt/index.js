@@ -37,7 +37,7 @@ function parseResponse(responseBody) {
     text = responseBody.choices[0].message.content;
   } catch (e) {}
   
-  return text;
+  return text.replaceAll(/^[ \t]*\r?\n/gm, '');
 }
 
 			this.onUnload = commands.registerCommand({
@@ -59,7 +59,7 @@ function parseResponse(responseBody) {
         displayName: "clyde",
         description: "use clyde to send the reply",
         displayDescription: "use clyde to send the reply",
-        required: false,
+        required: true,
         type: 5
                   }
                  ],
@@ -74,14 +74,16 @@ function parseResponse(responseBody) {
             
             
             let resposta = await generateResponse(mensagem)
+            logger.log(resposta);
            
              if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
                 content: resposta
             });
             } else {
-            sendEphemeralClydeMessage(ctx.channel.id, resposta)
+            await sendEphemeralClydeMessage(ctx.channel.id, resposta)
             }
+            await sendEphemeralClydeMessage(ctx.channel.id, "pronto")
 
         } catch (err) {
             logger.log(err);
