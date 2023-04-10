@@ -6,19 +6,8 @@ export default {
 				metro.findByProps("sendBotMessage");
 			const MessageActions = metro.findByProps("sendMessage", "receiveMessage")
 			
-			
-			
-function parseResponse(responseBody) {
-  let text = responseBody;
-  try {
-    text = responseBody.choices[0].message.content;
-  } catch (e) {}
-  
-  return text;
-}
 
-
-async function generateResponse(msg) {
+const req = async function (msg) {
   const request = {
     method: 'POST',
     headers: {
@@ -40,7 +29,7 @@ async function generateResponse(msg) {
   const response = await fetch('https://api.openai.com/v1/chat/completions', request);
   const responseBody = await response.json();
   
-  return parseResponse(responseBody);
+  return responseBody
 }
 
 			this.onUnload = commands.registerCommand({
@@ -76,15 +65,15 @@ async function generateResponse(msg) {
             
             
             
-            let resposta = await generateResponse(mensagem)
+            let resposta = await req(mensagem)
             //logger.log(resposta);
            
              if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
-                content: resposta
+                content: resposta.choices[0].message.content
             });
             } else {
-            await sendEphemeralClydeMessage(ctx.channel.id, resposta)
+            await sendEphemeralClydeMessage(ctx.channel.id, resposta.choices[0].message.content)
             }
           //  await sendEphemeralClydeMessage(ctx.channel.id, "pronto")
 
