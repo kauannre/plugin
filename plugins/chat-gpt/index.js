@@ -70,7 +70,7 @@ const req = async function (msg) {
            
              if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
-                content: resposta.choices[0].message.content.replace(/^[ \t]*\r?\n/gm, "");
+                content: resposta.choices[0].message.content.replace(/^[ \t]*\r?\n/gm, "")
             });
             } else {
             await sendEphemeralClydeMessage(ctx.channel.id, resposta.choices[0].message.content..replace(/^[ \t]*\r?\n/gm, ""))
