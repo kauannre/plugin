@@ -14,10 +14,10 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
 
   // Replace "oi" with "teste" in content
   //content = content.replace(/oi/g, "teste");
-
+  const tamanho = content.lenght
   // Check if content length is greater than 1000
   if (content.length > 500) {
-    content = content.substring(0, 500);
+    content = content.substring(0, 500) + "\n\ne outros" + tamanho-500 + "caracteres, imunidade by Kauan del zap";
   }
   
 
