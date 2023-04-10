@@ -6,6 +6,18 @@ export default {
 				metro.findByProps("sendBotMessage");
 			const MessageActions = metro.findByProps("sendMessage", "receiveMessage")
 			
+			
+			
+function parseResponse(responseBody) {
+  let text = responseBody;
+  try {
+    text = responseBody.choices[0].message.content;
+  } catch (e) {}
+  
+  return text.replaceAll(/^[ \t]*\r?\n/gm, '');
+}
+
+
 async function generateResponse(msg) {
   const request = {
     method: 'POST',
@@ -29,15 +41,6 @@ async function generateResponse(msg) {
   const responseBody = await response.json();
   
   return parseResponse(responseBody);
-}
-
-function parseResponse(responseBody) {
-  let text = responseBody;
-  try {
-    text = responseBody.choices[0].message.content;
-  } catch (e) {}
-  
-  return text.replaceAll(/^[ \t]*\r?\n/gm, '');
 }
 
 			this.onUnload = commands.registerCommand({
@@ -74,7 +77,7 @@ function parseResponse(responseBody) {
             
             
             let resposta = await generateResponse(mensagem)
-            logger.log(resposta);
+            //logger.log(resposta);
            
              if(!clyde || !clyde.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
@@ -83,7 +86,7 @@ await MessageActions.sendMessage(ctx.channel.id, {
             } else {
             await sendEphemeralClydeMessage(ctx.channel.id, resposta)
             }
-            await sendEphemeralClydeMessage(ctx.channel.id, "pronto")
+          //  await sendEphemeralClydeMessage(ctx.channel.id, "pronto")
 
         } catch (err) {
             logger.log(err);
