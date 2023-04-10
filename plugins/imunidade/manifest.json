@@ -1,6 +1,6 @@
 {
-    "name": "remover emojis",
-    "description": "remover todos os tipos de emojis substituindo eles pra um ponto",
+    "name": "ler 500 caracteres",
+    "description": "com isso ativado seu Discord só irá ler os primeiros 500 caracteres e o resta estará [imunidade by Kauan]",
     "authors": [
         {
             "name": "Kauan del zap",
