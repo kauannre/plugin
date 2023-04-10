@@ -19,7 +19,7 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
 /*  if (content.length > 500) {
     content = content.substring(0, 500);
   }*/
-  const regex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{2600}-\u{26FF}]/gu;
+  const regex = /^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]+$/u;
   if (regex.test(content)) {
   content = content.replace(regex, '.');
   }
