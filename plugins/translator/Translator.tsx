@@ -2,7 +2,6 @@ import { findByProps as getByProps } from "@vendetta/metro"
 import { ReactNative, constants as Constants, clipboard, React } from "@vendetta/metro/common"
 import { showToast } from "@vendetta/ui/toasts"
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets"
-import { cleanMessage } from "./cleanMessage"
 import { stylesheet } from "@vendetta/metro/common"
 import { semanticColors } from "@vendetta/ui"
 
@@ -54,11 +53,11 @@ export default function RawPage({ message }) {
     }
 
     const handleCopyRawData = () => {
-        clipboard.setString(translation !== "" ? translation : JSON.stringify(cleanMessage(message), null, 4))
+        clipboard.setString(translation !== "" ? translation : message.content)
         showToast("Copied data to clipboard", getAssetId("toast_copy_link"))
     }
 
-    const stringMessage = React.useMemo(() => JSON.stringify(cleanMessage(message), null, 4), [message.id])
+    const stringMessage = React.useMemo(() => message.content, [message.id])
 
     return (<>
         <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
