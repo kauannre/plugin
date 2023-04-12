@@ -1,6 +1,6 @@
 {
-    "name": "GeoIP Info",
-    "description": " Get the geographic location of any IP address using the ip-info API",
+    "name": "GeoIP",
+    "description": "Get details about IPv4/IPv6 address or a domain name.",
     "authors": [
         {
             "name": "Kauan del zap",
