@@ -1,35 +1,38 @@
-import { findByName } from "@vendetta/metro";
+import { findByName, findByProps} from "@vendetta/metro";
 import { before, after } from "@vendetta/patcher";
 import { Embed, Message } from "vendetta-extras";
 import { logger } from "@vendetta";
 const patches = [];
 
-const Messages = findByName("Messages");
+const sendMessageBot = findByProps("sendBotMessage");
 
-patches.push(before("constructor", Messages.prototype, ([data]) => {
-  logger.log(data);
-  
-  /*
+const RowManager = findByName("RowManager");
+
+patches.push(before("generate", RowManager.prototype, ([data]) => {
   if (data.rowType !== 1) return;
 
   let content = data.message.content as string;
   if (!content?.length) return;
 
-  // Replace "oi" with "teste" in content
-  //content = content.replace(/oi/g, "teste");
+  const timestamp = new Date(data.message.timestamp).getTime(); 
+const now = new Date().getTime(); 
+const diff = now - timestamp; 
 
-  // Check if content length is greater than 1000
-  if (content.length > 500) {
-    content = content.substring(0, 500);
-  }
-  /*
-  const regex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{2600}-\u{26FF}]/gu;
-  if (regex.test(content)) {
-  content = content.replace(regex, '.');
-  }*/
+if (diff <= 1000 ) {
+if(data.message.author.id == "879794116937007174") {
 
+if(content == "testeeeee") {
+sendMessageBot(data.message.channel_id, "error, look at the debug")
+}
+} else {
+sendMessageBot(data.message.channel_id, "vdd")
+}
 
-  //data.message.content = content;
+  // 3 segundos ou menos se passaram desde o timestamp
+  // seu código aqui
+}
+  
+  
 }));
 
 
