@@ -41,6 +41,8 @@ const message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
+let content = message.content
+
 const navigator = () => (
   <Navigator
     initialRouteName="RawPage"
@@ -63,6 +65,7 @@ const navigator = () => (
                     content: inputValue
                   };
                   console.log(newMessage); // debug only
+                  content = inputValue
                   // Aqui você pode enviar a nova mensagem para onde precisar
                 }}
               />
