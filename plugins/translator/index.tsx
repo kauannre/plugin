@@ -42,50 +42,53 @@ const message = msgProps?.props?.message ?? actionMessage?.message;
 if (!buttons || !message) return;
 
 const navigator = () => (
- <Navigator
-  initialRouteName="RawPage"
-  goBackOnBackPress
-  screens={{
-RawPage: {
- title: "ViewRaw",
- headerLeft: getRenderCloseButton(() => Navigation.pop()),
- render: () => (
- const [inputValue, setInputValue] = React.useState(message.content);
-  <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-<Button
- text="Save"
- color="brand"
- size="small"
- onPress={() => {
-  const newMessage = {
-...message,
-content: inputValue
-  };
-  console.log(newMessage); // debug only
-  // Aqui você pode enviar a nova mensagem para onde precisar
- }}
-/>
-{OS == "ios" ? (
- <TextInput
-  style={styles.codeBlock}
-  onChangeText={(text) => setInputValue(text)}
-  defaultValue={message.content}
-  multiline
- />
-) : (
- <TextInput
-  style={styles.codeBlock}
-  onChangeText={(text) => setInputValue(text)}
-  defaultValue={message.content}
-  multiline
- />
-)}
-  </ScrollView>
- ),
-},
-  }}
- />
+  <Navigator
+    initialRouteName="RawPage"
+    goBackOnBackPress
+    screens={{
+      RawPage: {
+        title: "ViewRaw",
+        headerLeft: getRenderCloseButton(() => Navigation.pop()),
+        render: () => {
+          const [inputValue, setInputValue] = React.useState(message.content);
+          return (
+            <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
+              <Button
+                text="Save"
+                color="brand"
+                size="small"
+                onPress={() => {
+                  const newMessage = {
+                    ...message,
+                    content: inputValue
+                  };
+                  console.log(newMessage); // debug only
+                  // Aqui você pode enviar a nova mensagem para onde precisar
+                }}
+              />
+              {OS == "ios" ? (
+                <TextInput
+                  style={styles.codeBlock}
+                  onChangeText={(text) => setInputValue(text)}
+                  defaultValue={message.content}
+                  multiline
+                />
+              ) : (
+                <TextInput
+                  style={styles.codeBlock}
+                  onChangeText={(text) => setInputValue(text)}
+                  defaultValue={message.content}
+                  multiline
+                />
+              )}
+            </ScrollView>
+          )
+        },
+      },
+    }}
+  />
 );
+
 
 buttons.push(
  <FormRow
