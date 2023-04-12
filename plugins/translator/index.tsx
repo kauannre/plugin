@@ -37,7 +37,7 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
 React.useEffect(() => () => { unpatch() }, []); // omg!!!!!!!!!!!!!
 let [msgProps, buttons] = component.props?.children?.props?.children?.props?.children;
 
-const message = msgProps?.props?.message ?? actionMessage?.message;
+let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
@@ -79,7 +79,9 @@ const navigator = () => (
               ) : (
                 <TextInput
                   style={styles.codeBlock}
-                  onChangeText={(text) => setInputValue(text)}
+                  onChangeText={(text) => 
+                  message.content = text
+                  }
                   defaultValue={message.content}
                   multiline
                 />
