@@ -40,7 +40,7 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
 
             buttons.push(
                 <FormRow
-                    label="View Raw"
+                    label="traduzir"
                     leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
                     onPress={() => {
                         ActionSheet.hideActionSheet()
