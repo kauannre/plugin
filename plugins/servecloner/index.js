@@ -14,10 +14,8 @@ export default {
     const headersprincipal = {
       'user-agent': 'Discord-Android/126021',
   'authorization': getToken(),
-  'x-fingerprint': '1090148022261915688.3l02euwN_G30bkZ-3LOixHptgSY',
   'x-discord-locale': 'pt-BR',
   'accept-language': 'pt-BR',
-  'x-super-properties': 'eyJicm93c2VyIjoiRGlzY29yZCBBbmRyb2lkIiwiYnJvd3Nlcl91c2VyX2FnZW50IjoiRGlzY29yZC1BbmRyb2lkLzEyNjAyMSIsImNsaWVudF9idWlsZF9udW1iZXIiOjEyNjAyMSwiY2xpZW50X3ZlcnNpb24iOiIxMjYuMjEgLSBTdGFibGUiLCJkZXZpY2UiOiJtb3Rvcm9sYSBvbmUsIGRlZW4iLCJvcyI6IkFuZHJvaWQiLCJvc19zZGtfdmVyc2lvbiI6IjI5Iiwib3NfdmVyc2lvbiI6IjEwIiwic3lzdGVtX2xvY2FsZSI6InB0LUJSIiwiY2xpZW50X3BlcmZvcm1hbmNlX2NwdSI6MCwiY2xpZW50X3BlcmZvcm1hbmNlX21lbW9yeSI6MjkzODg0LCJjcHVfY29yZV9jb3VudCI6OCwiYWNjZXNzaWJpbGl0eV9zdXBwb3J0X2VuYWJsZWQiOmZhbHNlLCJhY2Nlc3NpYmlsaXR5X2ZlYXR1cmVzIjoyNTZ9',
   'content-type': 'application/json; charset=UTF-8',
   'accept-encoding': 'gzip, utf-8',
   'cookie': '__sdcfduid=28cf6322cd2a11eda32afa05ee9c977acecdd052fa2ff9243c2ef7fff44b8f23e80421f014c65eedc694ca7fd5df5585; __cfruid=beb024e923d1064b07f8693f0806bb3d8a099186-1679982546; __dcfduid=28cf6322cd2a11eda32afa05ee9c977a'
