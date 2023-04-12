@@ -41,7 +41,7 @@ let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
-let content = message.content
+let content = msgProps
 
 const navigator = () => (
   <Navigator
@@ -52,7 +52,7 @@ const navigator = () => (
         title: "ViewRaw",
         headerLeft: getRenderCloseButton(() => Navigation.pop()),
         render: () => {
-          const [inputValue, setInputValue] = React.useState(message.content);
+          const [inputValue, setInputValue] = React.useState(msgProps);
           return (
             <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
               <Button
@@ -73,18 +73,18 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  message.content = text
+                  msgProps = text
                   }
-                  defaultValue={message.content}
+                  defaultValue={msgProps}
                   multiline
                 />
               ) : (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  message.content = text
+                  msgProps = text
                   }
-                  defaultValue={message.content}
+                  defaultValue={msgProps}
                   multiline
                 />
               )}
@@ -116,53 +116,3 @@ export const onUnload = () => unpatch();
 
 
 
-const styles = stylesheet.createThemedStyleSheet({
-  codeBlock: {
- fontFamily: Constants.Fonts.CODE_SEMIBOLD,
- fontSize: 12,
- backgroundColor: semanticColors.BACKGROUND_SECONDARY,
- color: semanticColors.TEXT_NORMAL,
- marginTop: 10,
- borderRadius: 3,
- padding: 10,
-  },
-});
-
-export default function RawPage({ message }) {
-  const [inputValue, setInputValue] = React.useState(message.content);
-
-  return (
- <>
-<ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-  <Button
- text="Save"
- color="brand"
- size="small"
- onPress={() => {
-const newMessage = {
-  ...message,
-  content: inputValue
-};
-console.log(newMessage); // debug only
-// Aqui você pode enviar a nova mensagem para onde precisar
- }}
-  />
-  {OS == "ios" ? (
- <TextInput
-style={styles.codeBlock}
-onChangeText={(text) => setInputValue(text)}
-defaultValue={message.content}
-multiline
- />
-  ) : (
- <TextInput
-style={styles.codeBlock}
-onChangeText={(text) => setInputValue(text)}
-defaultValue={message.content}
-multiline
- />
-  )}
-</ScrollView>
- </>
-  );
-}
