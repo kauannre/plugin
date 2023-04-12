@@ -72,7 +72,9 @@ const navigator = () => (
               {OS == "ios" ? (
                 <TextInput
                   style={styles.codeBlock}
-                  onChangeText={(text) => setInputValue(text)}
+                  onChangeText={(text) => 
+                  message.content = text
+                  }
                   defaultValue={message.content}
                   multiline
                 />
@@ -97,8 +99,8 @@ const navigator = () => (
 
 buttons.push(
  <FormRow
-  label="View Raw"
-  leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
+  label="Edit Message"
+  leading={<Icon source={getAssetId("ic_message_edit")} />}
   onPress={() => {
 ActionSheet.hideActionSheet();
 Navigation.push(navigator);
