@@ -6,7 +6,6 @@ import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 import { before, after } from "@vendetta/patcher";
 import { Forms } from "@vendetta/ui/components";
-//import RawPage from "./RawPage";
 
 const { ScrollView, Text, TextInput, Platform } = ReactNative;
 const { OS } = Platform;
@@ -17,9 +16,6 @@ const DiscordNavigator = getByProps("getRenderCloseButton");
 const { default: Navigator, getRenderCloseButton } = DiscordNavigator;
 const Icon = findByName("Icon");
 const { FormRow } = Forms;
-
-
-
 
 const styles = stylesheet.createThemedStyleSheet({
   codeBlock: {
@@ -34,16 +30,16 @@ const styles = stylesheet.createThemedStyleSheet({
 });
 
 const unpatch = before("openLazy", ActionSheet, (ctx) => {
-    const [component, args, actionMessage] = ctx
-    if (args !== "MessageLongPressActionSheet") return
+    const [component, args, actionMessage] = ctx;
+    if (args !== "MessageLongPressActionSheet") return;
     component.then(instance => {
         const unpatch = after("default", instance, (_, component) => {
-            React.useEffect(() => () => { unpatch() }, []) // omg!!!!!!!!!!!!!
-            let [msgProps, buttons] = component.props?.children?.props?.children?.props?.children
+            React.useEffect(() => () => { unpatch() }, []); // omg!!!!!!!!!!!!!
+            let [msgProps, buttons] = component.props?.children?.props?.children?.props?.children;
 
-            const message = msgProps?.props?.message ?? actionMessage?.message
+            const message = msgProps?.props?.message ?? actionMessage?.message;
 
-            if (!buttons || !message) return
+            if (!buttons || !message) return;
 
             const navigator = () => (
                 <Navigator
@@ -53,109 +49,56 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
                         RawPage: {
                             title: "ViewRaw",
                             headerLeft: getRenderCloseButton(() => Navigation.pop()),
-                            render: () => <
-const [inputValue, setInputValue] = React.useState(message.content);
-      <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-        <Button
-          text="Save"
-          color="brand"
-          size="small"
-          onPress={() => {
-            const newMessage = {
-              ...message,
-              content: inputValue
-            };
-            console.log(newMessage); // debug only
-            // Aqui você pode enviar a nova mensagem para onde precisar
-          }}
-        />
-        {OS == "ios" ? (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
-            multiline
-          />
-        ) : (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
-            multiline
-          />
-        )}
-      </ScrollView>
-                            
-                            />
-                        }
+                            render: () => (
+                                <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
+                                    <Button
+                                        text="Save"
+                                        color="brand"
+                                        size="small"
+                                        onPress={() => {
+                                            const newMessage = {
+                                                ...message,
+                                                content: inputValue
+                                            };
+                                            console.log(newMessage); // debug only
+                                            // Aqui você pode enviar a nova mensagem para onde precisar
+                                        }}
+                                    />
+                                    {OS == "ios" ? (
+                                        <TextInput
+                                            style={styles.codeBlock}
+                                            onChangeText={(text) => setInputValue(text)}
+                                            defaultValue={message.content}
+                                            multiline
+                                        />
+                                    ) : (
+                                        <TextInput
+                                            style={styles.codeBlock}
+                                            onChangeText={(text) => setInputValue(text)}
+                                            defaultValue={message.content}
+                                            multiline
+                                        />
+                                    )}
+                                </ScrollView>
+                            ),
+                        },
                     }}
                 />
-            )
+            );
 
             buttons.push(
                 <FormRow
                     label="View Raw"
                     leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
                     onPress={() => {
-                        ActionSheet.hideActionSheet()
-                        Navigation.push(navigator)
+                        ActionSheet.hideActionSheet();
+                        Navigation.push(navigator);
                     }}
-                />)
-        })
-    })
-})
-
-export const onUnload = () => unpatch()
-
-
-
-const styles = stylesheet.createThemedStyleSheet({
-  codeBlock: {
-    fontFamily: Constants.Fonts.CODE_SEMIBOLD,
-    fontSize: 12,
-    backgroundColor: semanticColors.BACKGROUND_SECONDARY,
-    color: semanticColors.TEXT_NORMAL,
-    marginTop: 10,
-    borderRadius: 3,
-    padding: 10,
-  },
+                />
+            );
+        });
+    });
 });
 
-export default function RawPage({ message }) {
-  const [inputValue, setInputValue] = React.useState(message.content);
 
-  return (
-    <>
-      <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-        <Button
-          text="Save"
-          color="brand"
-          size="small"
-          onPress={() => {
-            const newMessage = {
-              ...message,
-              content: inputValue
-            };
-            console.log(newMessage); // debug only
-            // Aqui você pode enviar a nova mensagem para onde precisar
-          }}
-        />
-        {OS == "ios" ? (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
-            multiline
-          />
-        ) : (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
-            multiline
-          />
-        )}
-      </ScrollView>
-    </>
-  );
-}
+export const onUnload = () => unpatch();
