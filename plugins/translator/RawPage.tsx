@@ -2,7 +2,6 @@ import { findByProps as getByProps } from "@vendetta/metro";
 import { ReactNative, constants as Constants, clipboard, React } from "@vendetta/metro/common";
 import { showToast } from "@vendetta/ui/toasts";
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets";
-import { cleanMessage } from "./cleanMessage";
 import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 
@@ -23,7 +22,6 @@ const styles = stylesheet.createThemedStyleSheet({
 });
 
 export default function RawPage({ message }) {
-  const stringMessage = React.useMemo(() => JSON.stringify(cleanMessage(message), null, 4), [message.id]);
   const [inputValue, setInputValue] = React.useState(message.content);
 
   return (
@@ -50,12 +48,9 @@ export default function RawPage({ message }) {
             value={inputValue}
           />
         ) : (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            multiline
-            value={inputValue}
-          />
+          <Text selectable style={styles.codeBlock}>
+            {inputValue}
+          </Text>
         )}
       </ScrollView>
     </>
