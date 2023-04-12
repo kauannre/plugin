@@ -2,6 +2,7 @@ import { findByProps as getByProps } from "@vendetta/metro";
 import { ReactNative, constants as Constants, clipboard, React } from "@vendetta/metro/common";
 import { showToast } from "@vendetta/ui/toasts";
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets";
+import { cleanMessage } from "./cleanMessage";
 import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 
@@ -18,16 +19,12 @@ const styles = stylesheet.createThemedStyleSheet({
     marginTop: 10,
     borderRadius: 3,
     padding: 10,
-  }
+  },
 });
 
-interface RawPageProps {
-  message: any;
-  onSave: (newContent: string) => void;
-}
-
-export default function RawPage({ message, onSave }: RawPageProps) {
-  const [content, setContent] = React.useState<string>(message.content);
+export default function RawPage({ message }) {
+  const stringMessage = React.useMemo(() => JSON.stringify(cleanMessage(message), null, 4), [message.id]);
+  const [inputValue, setInputValue] = React.useState(message.content);
 
   return (
     <>
@@ -37,21 +34,28 @@ export default function RawPage({ message, onSave }: RawPageProps) {
           color="brand"
           size="small"
           onPress={() => {
-            onSave(content);
-            showToast("Content saved", getAssetId("toast_copy_link"));
+            const newMessage = {
+              ...message,
+              content: inputValue
+            };
+            console.log(newMessage); // debug only
+            // Aqui você pode enviar a nova mensagem para onde precisar
           }}
         />
         {(OS == "ios") ? (
           <TextInput
             style={styles.codeBlock}
+            onChangeText={(text) => setInputValue(text)}
             multiline
-            value={content}
-            onChangeText={(text) => setContent(text)}
+            value={inputValue}
           />
         ) : (
-          <Text selectable style={styles.codeBlock}>
-            {content}
-          </Text>
+          <TextInput
+            style={styles.codeBlock}
+            onChangeText={(text) => setInputValue(text)}
+            multiline
+            value={inputValue}
+          />
         )}
       </ScrollView>
     </>
