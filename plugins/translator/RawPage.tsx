@@ -2,6 +2,7 @@ import { findByProps as getByProps } from "@vendetta/metro";
 import { ReactNative, constants as Constants, clipboard, React } from "@vendetta/metro/common";
 import { showToast } from "@vendetta/ui/toasts";
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets";
+import { cleanMessage } from "./cleanMessage";
 import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 
@@ -22,7 +23,8 @@ const styles = stylesheet.createThemedStyleSheet({
 });
 
 export default function RawPage({ message }) {
-  const [inputValue, setInputValue] = React.useState(message.content);
+  const stringMessage = React.useMemo(() => JSON.stringify(cleanMessage(message), null, 4), [message.id]);
+  const [inputValue, setInputValue] = React.useState(message.content); // inicializa o valor do estado local com o conteúdo atual da mensagem
 
   return (
     <>
@@ -34,26 +36,23 @@ export default function RawPage({ message }) {
           onPress={() => {
             const newMessage = {
               ...message,
-              content: inputValue
+              content: inputValue // atualiza o conteúdo da mensagem com o valor atual de inputValue
             };
             console.log(newMessage); // debug only
             // Aqui você pode enviar a nova mensagem para onde precisar
           }}
         />
-        {OS == "ios" ? (
+        {(OS == "ios") ? (
           <TextInput
             style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            value={inputValue}
+            value={inputValue} // vincula o valor do TextInput ao estado local inputValue
+            onChangeText={(text) => setInputValue(text)} // atualiza o estado local inputValue sempre que o texto do TextInput mudar
             multiline
           />
         ) : (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            value={inputValue}
-            multiline
-          />
+          <Text selectable style={styles.codeBlock}>
+            {stringMessage}
+          </Text>
         )}
       </ScrollView>
     </>
