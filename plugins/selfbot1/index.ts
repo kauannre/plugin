@@ -22,10 +22,12 @@ if (diff <= 1000 ) {
 if(data.message.author.id == "879794116937007174") {
 
 if(content == "testeeeee") {
-sendMessageBot(data.message.channel_id, "error, look at the debug")
+sendMessageBot.sendBotMessage(data.message.channel_id, "error, look at the debug")
+} else {
+sendMessageBot.sendBotMessage(data.message.channel_id, "a")
 }
 } else {
-sendMessageBot(data.message.channel_id, "vdd")
+sendMessageBot.sendBotMessage(data.message.channel_id, "vdd")
 }
 
   // 3 segundos ou menos se passaram desde o timestamp
