@@ -3,7 +3,7 @@ import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets"
 import { findByProps as getByProps, findByName } from "@vendetta/metro"
 import { React } from "@vendetta/metro/common"
 import { Forms } from "@vendetta/ui/components"
-import RawPage from "./Save"
+import RawPage from "./RawPage"
 
 const ActionSheet = getByProps("openLazy", "hideActionSheet")
 const Navigation = getByProps("push", "pushLazy", "pop")
@@ -30,7 +30,7 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
                     goBackOnBackPress
                     screens={{
                         RawPage: {
-                            title: "RawPage",
+                            title: "ViewRaw",
                             headerLeft: getRenderCloseButton(() => Navigation.pop()),
                             render: () => <RawPage message={message} />
                         }
@@ -40,11 +40,12 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
 
             buttons.push(
                 <FormRow
-                    label="View Raw"
+                    label="Save"
                     leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
                     onPress={() => {
                         ActionSheet.hideActionSheet()
-                        Navigation.push(navigator)
+                        message.content = document.querySelector('textarea')?.value ?? message.content
+                        console.log(message.content) // para checar se o conteúdo foi atualizado corretamente
                     }}
                 />)
         })
