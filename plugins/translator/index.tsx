@@ -1,3 +1,4 @@
+
 import { before, after } from "@vendetta/patcher"
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets"
 import { findByProps as getByProps, findByName } from "@vendetta/metro"
@@ -32,23 +33,18 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
                         RawPage: {
                             title: "ViewRaw",
                             headerLeft: getRenderCloseButton(() => Navigation.pop()),
-                            render: () => <RawPage message={message} />
+                            render: () => <RawPage message={message} onSave={(newContent) => {message.content = newContent; ActionSheet.hideActionSheet()}} />
                         }
                     }}
                 />
             )
 
             buttons.push(
-  <FormRow
-    label="Save"
-    leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
-    onPress={() => {
-      ActionSheet.hideActionSheet();
-      message.content = document.querySelector('textarea')?.value ?? message.content;
-      console.log(message.content); // para checar se o conteúdo foi atualizado corretamente
-    }}
-  />
-)
+                <FormRow
+                    label="Save"
+                    leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
+                    onPress={() => Navigation.push(navigator)}
+                />)
         })
     })
 })
