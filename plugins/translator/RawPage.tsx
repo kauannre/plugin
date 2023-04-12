@@ -1,6 +1,5 @@
 import { findByProps as getByProps } from "@vendetta/metro";
-import { ReactNative, constants as Constants, clipboard, React } from "@vendetta/metro/common";
-import { showToast } from "@vendetta/ui/toasts";
+import { ReactNative, constants as Constants } from "@vendetta/metro/common";
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets";
 import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
@@ -21,8 +20,16 @@ const styles = stylesheet.createThemedStyleSheet({
   },
 });
 
-export default function RawPage({ message }) {
+export default function RawPage({ message, onSave }) {
   const [inputValue, setInputValue] = React.useState(message.content);
+
+  const handleSave = () => {
+    const newMessage = {
+      ...message,
+      content: inputValue
+    };
+    onSave(newMessage);
+  };
 
   return (
     <>
@@ -31,27 +38,20 @@ export default function RawPage({ message }) {
           text="Save"
           color="brand"
           size="small"
-          onPress={() => {
-            const newMessage = {
-              ...message,
-              content: inputValue
-            };
-            console.log(newMessage); // debug only
-            // Aqui você pode enviar a nova mensagem para onde precisar
-          }}
+          onPress={handleSave}
         />
         {OS == "ios" ? (
           <TextInput
             style={styles.codeBlock}
             onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
+            value={inputValue}
             multiline
           />
         ) : (
           <TextInput
             style={styles.codeBlock}
             onChangeText={(text) => setInputValue(text)}
-            defaultValue={message.content}
+            value={inputValue}
             multiline
           />
         )}
