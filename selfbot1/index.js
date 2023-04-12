@@ -1,0 +1,1 @@
+(function(n,o,r,c){"use strict";const e=[],u=o.findByName("Messages");e.push(r.before("constructor",u.prototype,function(t){let[s]=t;c.logger.log(s)}));const a=function(){return e.forEach(function(t){return t()})};return n.onUnload=a,n})({},vendetta.metro,vendetta.patcher,vendetta);
