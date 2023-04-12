@@ -27,32 +27,32 @@ export default function RawPage({ message }) {
   return (
     <>
       <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-        <Button
-          text="Save"
-          color="brand"
-          size="small"
-          onPress={() => {
-            const newMessage = {
-              ...message,
-              content: inputValue
-            };
-            console.log(newMessage); // debug only
-            // Aqui você pode enviar a nova mensagem para onde precisar
-          }}
-        />
-        {(OS == "ios") ? (
-          <TextInput
-            style={styles.codeBlock}
-            onChangeText={(text) => setInputValue(text)}
-            multiline
-            value={inputValue}
-          />
-        ) : (
-          <Text selectable style={styles.codeBlock}>
-            {inputValue}
-          </Text>
-        )}
-      </ScrollView>
+  <Button
+    text="Save"
+    color="brand"
+    size="small"
+    onPress={() => {
+      const newMessage = {
+        ...message,
+        content: inputValue
+      };
+      console.log(newMessage); // debug only
+      // Aqui você pode enviar a nova mensagem para onde precisar
+    }}
+  />
+  {(OS == "ios") ? (
+    <TextInput
+      style={styles.codeBlock}
+      onChange={(event) => setInputValue(event.nativeEvent.text)}
+      multiline
+      defaultValue={message.content} // utilize defaultValue em vez de value
+    />
+  ) : (
+    <Text selectable style={styles.codeBlock}>
+      {stringMessage}
+    </Text>
+  )}
+</ScrollView>
     </>
   );
 }
