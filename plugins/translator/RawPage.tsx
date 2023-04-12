@@ -22,38 +22,40 @@ const styles = stylesheet.createThemedStyleSheet({
 });
 
 export default function RawPage({ message }) {
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState(message.content);
 
   return (
     <>
-<ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
-  <Button
-    text="Save"
-    color="brand"
-    size="small"
-    onPress={() => {
-      const newMessage = {
-        ...message,
-        content: inputValue
-      };
-      console.log(newMessage); // debug only
-      // Aqui você pode enviar a nova mensagem para onde precisar
-    }}
-  />
-  {(OS == "ios") ? (
-    <TextInput
-      style={styles.codeBlock}
-      onChange={(event) => setInputValue(event.nativeEvent.text)}
-      multiline
-      defaultValue={message.content} // utilize defaultValue em vez de value
-    />
-  ) : (
-    <Text selectable style={styles.codeBlock}>
-      {JSON.stringify(message, null, 4)}
-    </Text>
-  )}
-</ScrollView>
-
+      <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
+        <Button
+          text="Save"
+          color="brand"
+          size="small"
+          onPress={() => {
+            const newMessage = {
+              ...message,
+              content: inputValue
+            };
+            console.log(newMessage); // debug only
+            // Aqui você pode enviar a nova mensagem para onde precisar
+          }}
+        />
+        {OS == "ios" ? (
+          <TextInput
+            style={styles.codeBlock}
+            onChangeText={(text) => setInputValue(text)}
+            defaultValue={message.content}
+            multiline
+          />
+        ) : (
+          <TextInput
+            style={styles.codeBlock}
+            onChangeText={(text) => setInputValue(text)}
+            defaultValue={message.content}
+            multiline
+          />
+        )}
+      </ScrollView>
     </>
   );
 }
