@@ -40,19 +40,20 @@ export default function RawPage({ message }) {
             // Aqui você pode enviar a nova mensagem para onde precisar
           }}
         />
-        {(OS == "ios") ? (
+        {OS == "ios" ? (
           <TextInput
             style={styles.codeBlock}
             onChangeText={(text) => setInputValue(text)}
             value={inputValue}
             multiline
-            autoFocus
-            selection={{ start: 0, end: inputValue.length }}
           />
         ) : (
-          <Text selectable style={styles.codeBlock}>
-            {inputValue}
-          </Text>
+          <TextInput
+            style={styles.codeBlock}
+            onChangeText={(text) => setInputValue(text)}
+            value={inputValue}
+            multiline
+          />
         )}
       </ScrollView>
     </>
