@@ -1,5 +1,6 @@
 import { findByProps as getByProps } from "@vendetta/metro";
 import { ReactNative, constants as Constants } from "@vendetta/metro/common";
+import { showToast } from "@vendetta/ui/toasts";
 import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets";
 import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
@@ -20,7 +21,7 @@ const styles = stylesheet.createThemedStyleSheet({
   },
 });
 
-export default function RawPage({ message, onSave }) {
+export default function RawPage({ message, onClose }) {
   const [inputValue, setInputValue] = React.useState(message.content);
 
   const handleSave = () => {
@@ -28,7 +29,9 @@ export default function RawPage({ message, onSave }) {
       ...message,
       content: inputValue
     };
-    onSave(newMessage);
+    console.log(newMessage); // debug only
+    // Aqui você pode enviar a nova mensagem para onde precisar
+    onClose();
   };
 
   return (
