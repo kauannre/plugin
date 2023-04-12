@@ -3,7 +3,7 @@ import { getAssetIDByName as getAssetId } from "@vendetta/ui/assets"
 import { findByProps as getByProps, findByName } from "@vendetta/metro"
 import { React } from "@vendetta/metro/common"
 import { Forms } from "@vendetta/ui/components"
-import Translator from "./Translator"
+import RawPage from "./Save"
 
 const ActionSheet = getByProps("openLazy", "hideActionSheet")
 const Navigation = getByProps("push", "pushLazy", "pop")
@@ -26,13 +26,13 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
 
             const navigator = () => (
                 <Navigator
-                    initialRouteName="Translator"
+                    initialRouteName="RawPage"
                     goBackOnBackPress
                     screens={{
-                        Translator: {
-                            title: "Translator",
+                        RawPage: {
+                            title: "RawPage",
                             headerLeft: getRenderCloseButton(() => Navigation.pop()),
-                            render: () => <Translator message={message} />
+                            render: () => <RawPage message={message} />
                         }
                     }}
                 />
@@ -40,7 +40,7 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
 
             buttons.push(
                 <FormRow
-                    label="traduzir"
+                    label="View Raw"
                     leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
                     onPress={() => {
                         ActionSheet.hideActionSheet()
