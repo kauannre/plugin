@@ -39,14 +39,16 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
             )
 
             buttons.push(
-                <FormRow
-                    label="View Raw"
-                    leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
-                    onPress={() => {
-                        ActionSheet.hideActionSheet()
-                        Navigation.push(navigator)
-                    }}
-                />)
+  <FormRow
+    label="Save"
+    leading={<Icon source={getAssetId("ic_chat_bubble_16px")} />}
+    onPress={() => {
+      ActionSheet.hideActionSheet();
+      message.content = document.querySelector('textarea')?.value ?? message.content;
+      console.log(message.content); // para checar se o conteúdo foi atualizado corretamente
+    }}
+  />
+)
         })
     })
 })
