@@ -68,13 +68,7 @@ const navigator = () => (
                   //console.log(newMessage); // debug only
                   let aaaaas = editmsg.find((sla) => sla.id == message.id)
                   if(aaaaas) {
-                  
-                  remove = editmsg.indexOf(aaaaas)
-                  editmsg.splice(remove, 1)
-                  let mensagemkk = {}
-                  mensagemkk.novocontent = test
-                  mensagemkk.id = message.id
-                  editmsg.push(mensagemkk)
+                  aaaaas.novocontent = test
                   message.content = test
                   } else {
                   let mensagemkk = {}
