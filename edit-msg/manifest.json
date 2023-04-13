@@ -1,1 +1,1 @@
-{"name":"Edit Message","description":"Edit any message locally","authors":[{"name":"kauan del zap","id":"879794116937007174"}],"main":"index.js","vendetta":{"icon":"ic_message_edit"},"hash":"8b570e3dcf487ea323fb1132cdacce60fa33f7a87b78e4a9aab86d7d3f4afa7a"}
+{"name":"EditMessage","description":"Edit any message locally","authors":[{"name":"Kauan del zap","id":"879794116937007174"}],"main":"index.js","vendetta":{"icon":"ic_message_edit"},"hash":"8b570e3dcf487ea323fb1132cdacce60fa33f7a87b78e4a9aab86d7d3f4afa7a"}
