@@ -6,7 +6,7 @@ import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 import { before, after } from "@vendetta/patcher";
 import { Forms } from "@vendetta/ui/components";
-
+import { logger } from "@vendetta";
 const { ScrollView, Text, TextInput, Platform } = ReactNative;
 const { OS } = Platform;
 const Button = getByProps("ButtonColors", "ButtonLooks", "ButtonSizes").default as any;
@@ -36,12 +36,12 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
   const unpatch = after("default", instance, (_, component) => {
 React.useEffect(() => () => { unpatch() }, []); // omg!!!!!!!!!!!!!
 let [msgProps, buttons] = component.props?.children?.props?.children?.props?.children;
-
+logger.log(msgProps);
 let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
-let content = JSON.stringify(msgProps.props.message, null, 2)
+let content = message.content
 
 const navigator = () => (
   <Navigator
@@ -52,7 +52,7 @@ const navigator = () => (
         title: "ViewRaw",
         headerLeft: getRenderCloseButton(() => Navigation.pop()),
         render: () => {
-          const [inputValue, setInputValue] = React.useState(JSON.stringify(msgProps.props.message, null, 2));
+          const [inputValue, setInputValue] = React.useState(message.content);
           return (
             <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
               <Button
@@ -73,18 +73,18 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  JSON.stringify(msgProps.props.message, null, 2) = text
+                  message.content = text
                   }
-                  defaultValue={JSON.stringify(msgProps.props.message, null, 2)}
+                  defaultValue={message.content}
                   multiline
                 />
               ) : (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  JSON.stringify(msgProps.props.message, null, 2) = text
+                  message.content = text
                   }
-                  defaultValue={JSON.stringify(msgProps.props.message, null, 2)}
+                  defaultValue={message.content}
                   multiline
                 />
               )}
