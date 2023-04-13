@@ -41,7 +41,7 @@ let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
-let content = msgProps
+let content = JSON.stringify(component, null, 2)
 
 const navigator = () => (
   <Navigator
@@ -52,7 +52,7 @@ const navigator = () => (
         title: "ViewRaw",
         headerLeft: getRenderCloseButton(() => Navigation.pop()),
         render: () => {
-          const [inputValue, setInputValue] = React.useState(msgProps);
+          const [inputValue, setInputValue] = React.useState(JSON.stringify(component, null, 2));
           return (
             <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
               <Button
@@ -73,18 +73,18 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  msgProps = text
+                  JSON.stringify(component, null, 2) = text
                   }
-                  defaultValue={msgProps}
+                  defaultValue={JSON.stringify(component, null, 2)}
                   multiline
                 />
               ) : (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  msgProps = text
+                  JSON.stringify(component, null, 2) = text
                   }
-                  defaultValue={msgProps}
+                  defaultValue={JSON.stringify(component, null, 2)}
                   multiline
                 />
               )}
@@ -113,6 +113,3 @@ Navigation.push(navigator);
 
 
 export const onUnload = () => unpatch();
-
-
-
