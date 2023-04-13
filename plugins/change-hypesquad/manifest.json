@@ -1,6 +1,6 @@
 {
-    "name": "change hypesquad",
-    "description": "change hypesquad within vendetta",
+    "name": "ChangeHypesquad",
+    "description": "Lets you change the hypesquad group inside vendetta",
     "authors": [
         {
             "name": "Kauan del zap",
