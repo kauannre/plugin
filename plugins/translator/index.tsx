@@ -41,7 +41,7 @@ let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
 
-let content = msgProps.props.message
+let content = JSON.stringify(msgProps.props.message, null, 2)
 
 const navigator = () => (
   <Navigator
@@ -52,7 +52,7 @@ const navigator = () => (
         title: "ViewRaw",
         headerLeft: getRenderCloseButton(() => Navigation.pop()),
         render: () => {
-          const [inputValue, setInputValue] = React.useState(msgProps.props.message);
+          const [inputValue, setInputValue] = React.useState(JSON.stringify(msgProps.props.message, null, 2));
           return (
             <ScrollView style={{ flex: 1, marginHorizontal: 13, marginVertical: 10 }}>
               <Button
@@ -73,18 +73,18 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  msgProps.props.message = text
+                  JSON.stringify(msgProps.props.message, null, 2) = text
                   }
-                  defaultValue={msgProps.props.message}
+                  defaultValue={JSON.stringify(msgProps.props.message, null, 2)}
                   multiline
                 />
               ) : (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  msgProps.props.message = text
+                  JSON.stringify(msgProps.props.message, null, 2) = text
                   }
-                  defaultValue={msgProps.props.message}
+                  defaultValue={JSON.stringify(msgProps.props.message, null, 2)}
                   multiline
                 />
               )}
