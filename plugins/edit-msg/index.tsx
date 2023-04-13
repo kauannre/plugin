@@ -46,11 +46,11 @@ let content = message.content
 let test
 const navigator = () => (
   <Navigator
-    initialRouteName="RawPage"
+    initialRouteName="MessagePage"
     goBackOnBackPress
     screens={{
-      RawPage: {
-        title: "ViewRaw",
+      MessagePage: {
+        title: "EditMessage",
         headerLeft: getRenderCloseButton(() => Navigation.pop()),
         render: () => {
           const [inputValue, setInputValue] = React.useState(message.content);
@@ -101,7 +101,9 @@ const navigator = () => (
                   multiline
                 />
               )}
-              <Text>go to another conversation and come back to it for editing to take effect</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#333', textAlign: 'center', marginTop: 20 }}>
+  go to another conversation and come back to it for editing to take effect
+</Text>
             </ScrollView>
           )
         },
