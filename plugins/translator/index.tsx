@@ -16,6 +16,12 @@ const DiscordNavigator = getByProps("getRenderCloseButton");
 const { default: Navigator, getRenderCloseButton } = DiscordNavigator;
 const Icon = findByName("Icon");
 const { FormRow } = Forms;
+const editmsg = [];
+const patches = [];
+
+export const onUnload = () => patches.forEach((unpatch) => unpatch());
+
+
 
 const styles = stylesheet.createThemedStyleSheet({
   codeBlock: {
@@ -29,7 +35,7 @@ const styles = stylesheet.createThemedStyleSheet({
   },
 });
 
-const unpatch = before("openLazy", ActionSheet, (ctx) => {
+patches.push(before("openLazy", ActionSheet, (ctx) => {
  const [component, args, actionMessage] = ctx;
  if (args !== "MessageLongPressActionSheet") return;
  component.then(instance => {
@@ -64,8 +70,14 @@ const navigator = () => (
                     ...message,
                     content: inputValue
                   };
-                  console.log(newMessage); // debug only
+                  //console.log(newMessage); // debug only
+                  if(editmsg.find((sla) => sla.id == message.id)) { 
+                  } else {
+                  console.log(editmsg)
                   message.content = test
+                  editmsg.push(message)
+                  }
+                  //message.content = test
                   // Aqui você pode enviar a nova mensagem para onde precisar
                 }}
               />
@@ -109,7 +121,33 @@ Navigation.push(navigator);
 );
   });
  });
-});
+}));
 
 
-export const onUnload = () => unpatch();
+
+const RowManager = findByName("RowManager");
+
+patches.push(before("generate", RowManager.prototype, ([data]) => {
+  if (data.rowType !== 1) return;
+  
+  
+  let msg = editmsg.find((sla) => sla.id == data.message.id)
+  if(msg) {
+  data.message = msg
+  /*
+  let content = data.message.content as string;
+  if (!content?.length) return;
+  
+  
+  if (content.length > 500) {
+    content = content.substring(0, 500);
+  }
+
+
+  data.message.content = content;*/
+  }
+}));
+
+
+
+export const onUnload = () => patches.forEach((unpatch) => unpatch());
