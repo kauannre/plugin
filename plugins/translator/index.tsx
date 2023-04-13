@@ -42,7 +42,7 @@ let message = msgProps?.props?.message ?? actionMessage?.message;
 if (!buttons || !message) return;
 
 let content = message.content
-
+let test
 const navigator = () => (
   <Navigator
     initialRouteName="RawPage"
@@ -65,7 +65,7 @@ const navigator = () => (
                     content: inputValue
                   };
                   console.log(newMessage); // debug only
-                  content = inputValue
+                  message.content = test
                   // Aqui você pode enviar a nova mensagem para onde precisar
                 }}
               />
@@ -73,7 +73,7 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  setInputValue(text)
+                  test = text
                   }
                   defaultValue={message.content}
                   multiline
@@ -82,7 +82,7 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  setInputValue(text)
+                  test = text
                   }
                   defaultValue={message.content}
                   multiline
