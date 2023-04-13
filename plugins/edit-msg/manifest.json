@@ -1,12 +1,12 @@
 {
-    "name": "Edit Message",
+    "name": "EditMessage",
     "description": "Edit any message locally",
     "authors": [
         {
-            "name": "kauan del zap",
+            "name": "Kauan del zap",
             "id": "879794116937007174"
         }
-       ],
+    ],
     "main": "index.tsx",
     "vendetta": {
         "icon": "ic_message_edit"
