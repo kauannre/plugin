@@ -73,9 +73,10 @@ const navigator = () => (
                   //console.log(newMessage); // debug only
                   if(editmsg.find((sla) => sla.id == message.id)) { 
                   } else {
-                  console.log(editmsg)
-                  message.content = test
-                  editmsg.push(message)
+                  
+                  let msgeditada = { id: message.id, editadu: test
+                  }
+                  editmsg.push(msgeditada)
                   }
                   //message.content = test
                   // Aqui você pode enviar a nova mensagem para onde precisar
@@ -127,13 +128,13 @@ Navigation.push(navigator);
 
 const RowManager = findByName("RowManager");
 
-patches.push(before("generate", RowManager.prototype, ([data]) => {
-  if (data.rowType !== 1) return;
+patches.push(after("generate", RowManager.prototype, ([data]) => {
+//  if (data.rowType !== 1) return;
   
   
   let msg = editmsg.find((sla) => sla.id == data.message.id)
   if(msg) {
-  data.message = msg
+  data.message.content = msg.editadu;
   /*
   let content = data.message.content as string;
   if (!content?.length) return;
