@@ -6,7 +6,7 @@ import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 import { before, after } from "@vendetta/patcher";
 import { Forms } from "@vendetta/ui/components";
-import { logger } from "@vendetta";
+
 const { ScrollView, Text, TextInput, Platform } = ReactNative;
 const { OS } = Platform;
 const Button = getByProps("ButtonColors", "ButtonLooks", "ButtonSizes").default as any;
@@ -36,7 +36,7 @@ const unpatch = before("openLazy", ActionSheet, (ctx) => {
   const unpatch = after("default", instance, (_, component) => {
 React.useEffect(() => () => { unpatch() }, []); // omg!!!!!!!!!!!!!
 let [msgProps, buttons] = component.props?.children?.props?.children?.props?.children;
-logger.log(msgProps);
+
 let message = msgProps?.props?.message ?? actionMessage?.message;
 
 if (!buttons || !message) return;
