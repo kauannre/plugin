@@ -73,7 +73,7 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  message.content = text
+                  setInputValue(text)
                   }
                   defaultValue={message.content}
                   multiline
@@ -82,7 +82,7 @@ const navigator = () => (
                 <TextInput
                   style={styles.codeBlock}
                   onChangeText={(text) => 
-                  message.content = text
+                  setInputValue(text)
                   }
                   defaultValue={message.content}
                   multiline
