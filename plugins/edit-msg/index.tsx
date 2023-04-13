@@ -20,15 +20,23 @@ const patches = [];
 
 const styles = stylesheet.createThemedStyleSheet({
   codeBlock: {
- fontFamily: Constants.Fonts.CODE_SEMIBOLD,
- fontSize: 12,
- backgroundColor: semanticColors.BACKGROUND_SECONDARY,
- color: semanticColors.TEXT_NORMAL,
- marginTop: 10,
- borderRadius: 3,
- padding: 10,
+    fontFamily: Constants.Fonts.CODE_SEMIBOLD,
+    fontSize: 12,
+    backgroundColor: semanticColors.BACKGROUND_SECONDARY,
+    color: semanticColors.TEXT_NORMAL,
+    marginTop: 10,
+    borderRadius: 3,
+    padding: 10,
+  },
+  infoText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
+
 
 patches.push(before("openLazy", ActionSheet, (ctx) => {
  const [component, args, actionMessage] = ctx;
@@ -101,7 +109,7 @@ const navigator = () => (
                   multiline
                 />
               )}
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#333', textAlign: 'center', marginTop: 20 }}>
+              <Text style={styles.infoText}>
                 Go to another conversation and come back to it for editing to take effect
               </Text>
             </ScrollView>
