@@ -128,7 +128,7 @@ Navigation.push(navigator);
 
 const RowManager = findByName("RowManager");
 
-patches.push(after("generate", RowManager.prototype, ([data]) => {
+patches.push(before("generate", RowManager.prototype, ([data]) => {
 //  if (data.rowType !== 1) return;
   
   
