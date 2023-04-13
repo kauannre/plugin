@@ -102,8 +102,8 @@ const navigator = () => (
                 />
               )}
               <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#333', textAlign: 'center', marginTop: 20 }}>
-  go to another conversation and come back to it for editing to take effect
-</Text>
+                Go to another conversation and come back to it for editing to take effect
+              </Text>
             </ScrollView>
           )
         },
