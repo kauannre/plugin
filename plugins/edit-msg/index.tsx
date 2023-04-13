@@ -109,7 +109,7 @@ const navigator = () => (
                   multiline
                 />
               )}
-              <Text style={styles.infoText}>
+              <Text>
                 Go to another conversation and come back to it for editing to take effect
               </Text>
             </ScrollView>
