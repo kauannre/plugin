@@ -69,19 +69,19 @@ const navigator = () => (
                   let aaaaas = editmsg.find((sla) => sla.id == message.id)
                   if(aaaaas) {
                   
-                  remove = pessoas.indexOf(aaaaas)
-                  pessoas.splice(remove, 1)
+                  remove = editmsg.indexOf(aaaaas)
+                  editmsg.splice(remove, 1)
                   let mensagemkk = {}
                   mensagemkk.novocontent = test
                   mensagemkk.id = message.id
                   editmsg.push(mensagemkk)
-                  console.log(editmsg)
+                  message.content = test
                   } else {
                   let mensagemkk = {}
                   mensagemkk.novocontent = test
                   mensagemkk.id = message.id
                   editmsg.push(mensagemkk)
-                  console.log(editmsg)
+                  message.content = test
                   }
                   Navigation.pop();
                   //message.content = test
@@ -107,6 +107,7 @@ const navigator = () => (
                   multiline
                 />
               )}
+              <Text>go to another conversation and come back to it for editing to take effect</Text>
             </ScrollView>
           )
         },
@@ -118,7 +119,7 @@ const navigator = () => (
 
 buttons.push(
  <FormRow
-  label="Edit Message"
+  label="Edit Message local"
   leading={<Icon source={getAssetId("ic_message_edit")} />}
   onPress={() => {
 ActionSheet.hideActionSheet();
