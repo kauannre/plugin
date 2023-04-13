@@ -65,7 +65,7 @@ const navigator = () => (
                     content: inputValue
                   };
                   console.log(newMessage); // debug only
-                  message.content = test
+                  message.content = newMessage
                   // Aqui você pode enviar a nova mensagem para onde precisar
                 }}
               />
