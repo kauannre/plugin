@@ -6,7 +6,6 @@ import { stylesheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 import { before, after } from "@vendetta/patcher";
 import { Forms } from "@vendetta/ui/components";
-
 const { ScrollView, Text, TextInput, Platform } = ReactNative;
 const { OS } = Platform;
 const Button = getByProps("ButtonColors", "ButtonLooks", "ButtonSizes").default as any;
@@ -18,10 +17,6 @@ const Icon = findByName("Icon");
 const { FormRow } = Forms;
 const editmsg = [];
 const patches = [];
-
-//export const onUnload = () => patches.forEach((unpatch) => unpatch());
-
-
 
 const styles = stylesheet.createThemedStyleSheet({
   codeBlock: {
@@ -71,7 +66,16 @@ const navigator = () => (
                     content: inputValue
                   };
                   //console.log(newMessage); // debug only
-                  if(editmsg.find((sla) => sla.id == message.id)) {
+                  let aaaaas = editmsg.find((sla) => sla.id == message.id)
+                  if(aaaaas) {
+                  
+                  remove = pessoas.indexOf(aaaaas)
+                  pessoas.splice(remove, 1)
+                  let mensagemkk = {}
+                  mensagemkk.novocontent = test
+                  mensagemkk.id = message.id
+                  editmsg.push(mensagemkk)
+                  console.log(editmsg)
                   } else {
                   let mensagemkk = {}
                   mensagemkk.novocontent = test
@@ -79,6 +83,7 @@ const navigator = () => (
                   editmsg.push(mensagemkk)
                   console.log(editmsg)
                   }
+                  Navigation.pop();
                   //message.content = test
                   // Aqui você pode enviar a nova mensagem para onde precisar
                 }}
@@ -125,57 +130,16 @@ Navigation.push(navigator);
  });
 }));
 
-
-
 const RowManager = findByName("RowManager");
-
 
 patches.push(after("generate", RowManager.prototype, ([data], row) => {
   if (data.rowType !== 1) return;
   
   let msg = editmsg.find((sla) => sla.id == row.message.id)
   if(msg) {
-//  data.message = msg
   row.message.content = msg.novocontent
-  /*
-  let content = data.message.content as string;
-  if (!content?.length) return;
-  
-  
-  if (content.length > 500) {
-    content = content.substring(0, 500);
   }
-
-
-  data.message.content = content;*/
-  }
-
   
 }));
-
-
-/*
-patches.push(before("generate", RowManager.prototype, ([data]) => {
-  if (data.rowType !== 1) return;
-  
-  
-  let msg = editmsg.find((sla) => sla.id == data.message.id)
-  if(msg) {
-  data.message = msg
-  /*
-  let content = data.message.content as string;
-  if (!content?.length) return;
-  
-  
-  if (content.length > 500) {
-    content = content.substring(0, 500);
-  }
-
-
-  data.message.content = content;
-  }
-}));*/
-
-
 
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
