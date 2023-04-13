@@ -1,1 +1,1 @@
-{"name":"change hypesquad","description":"change hypesquad within vendetta","authors":[{"name":"Kauan del zap","id":"879794116937007174"}],"main":"index.js","vendetta":{"icon":"ic_badge_hypesquad"},"hash":"d29f6357f3e8df77a5c0c7f58bd6d36cb0b95ef43196a86c81f581a9ba83003e"}
+{"name":"ChangeHypesquad","description":"Lets you change the hypesquad group inside vendetta","authors":[{"name":"Kauan del zap","id":"879794116937007174"}],"main":"index.js","vendetta":{"icon":"ic_badge_hypesquad"},"hash":"d29f6357f3e8df77a5c0c7f58bd6d36cb0b95ef43196a86c81f581a9ba83003e"}
