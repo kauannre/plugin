@@ -25,14 +25,14 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
             
 
 patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "MessageStore"), (args: any) => {
-           //     try {
+                try {
                 
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
                 
-                //let message = args[0]?.message?.content;
-               // if (!message) return;
+                let message = args[0]?.message?.content;
+                if (!message) return;
                 if (!msgantiga) return;
-                let msg = BotMessage.createBotMessage({channelId: args[0].message.channel_id, content: msgantiga + "[deleted]"});
+                let msg = BotMessage.createBotMessage({channelId: args[0].message.channel_id, content: msgantiga + "[deleted]\n" + message});
 msg.author = { username: "/vibrate", avatar: "clyde" };
 
 MessageActions.receiveMessage(args[0].message.channel_id, msg);
@@ -40,7 +40,7 @@ MessageActions.receiveMessage(args[0].message.channel_id, msg);
                 
                 //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
                     
-          //  } catch (e) {}
+            } catch (e) {}
             }));
 
 
