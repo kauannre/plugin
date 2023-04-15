@@ -10,9 +10,9 @@ const BotMessage = findByProps("createBotMessage");
 
 const patches = [];
 
-patches.push(before(FluxDispatcher, "dispatch", function(ctx) {
+patches.push(before(FluxDispatcher, "dispatch", ctx => {
 
-         console.log(ctx)
+         console.log(`${ctx}`)
          /*
             const [args] = ctx.args;
             if(!args) return
