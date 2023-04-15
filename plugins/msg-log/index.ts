@@ -32,14 +32,14 @@ patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "Me
                 
                 //console.log(args)
                 
-                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].channelId, args[0].id)?.content
+                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].channelId, args[0].id)
                 
                // let message = args[0]?.message?.content;
            //     if (!message) return;
-            //    if (!msgantiga) return;
+                if (!msgantiga) return;
             
-let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: msgantiga + "[deleted]\n"});
-msg.author = { username: "ANTI DELETE", avatar: "clyde" };
+let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: msgantiga.content});
+msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde" };
 
 MessageActions.receiveMessage(args[0].channelId, msg);
               //  findByProps("sendBotMessage").sendBotMessage(args[0].channelId, msgantiga)
