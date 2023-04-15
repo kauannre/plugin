@@ -9,12 +9,14 @@ const patches = [];
 const RowManager = findByName("RowManager");
 
 patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "MessageStore"), (args: any) => {
+                try {
+                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
                 
-                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id).content
-                
-                let message = args[0].message.content;
-                
-                    message = msgantiga + " `[edited]`\n" + message;
+                let message = args[0]?.message?.content;
+                if (!message) return;
+                if (!msgantiga) return;
+                    args[0].message.content = msgantiga + " `[edited]`\n" + message;
+            } catch (e) {}
             }));
 
 
