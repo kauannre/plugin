@@ -6,8 +6,6 @@ const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
 const MessageActions = findByProps("sendMessage", "receiveMessage")
 const BotMessage = findByProps("createBotMessage");
 
-
-
 const patches = [];
 
 
@@ -39,11 +37,12 @@ patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "Me
                // let message = args[0]?.message?.content;
            //     if (!message) return;
             //    if (!msgantiga) return;
-                let msg = BotMessage.createBotMessage({channelId: aargs[0].channelId, content: msgantiga + "[deleted]\n"});
+            /*
+                let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: msgantiga + "[deleted]\n"});
 msg.author = { username: "ANTI DELETR", avatar: "clyde" };
 
-MessageActions.receiveMessage(args[0].channelId, msg);
-                
+MessageActions.receiveMessage(args[0].channelId, msg);*/
+                findByProps("sendBotMessage").sendBotMessage(args[0].channelId, msgantiga)
                 
                 //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
                     
