@@ -26,7 +26,7 @@ patches.push(before(FluxDispatcher, "dispatch", ctx => {
          
          }
             
-            })
+            }))
 
 
 
