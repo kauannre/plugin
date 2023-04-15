@@ -26,7 +26,7 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
 
 
 
-patches.push(before("actionHandler", FD.PASSIVE_UPDATE_V1, args => {
+patches.push(before("actionHandler", FD.PASSIVE_UPDATE_V1, (args: any) => {
 console.log(args)
 /*
                 try {
