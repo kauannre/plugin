@@ -24,10 +24,10 @@ patches.push(before(FluxDispatcher, "dispatch", function(ctx) {
                 if (!message) return;
                 if (!msgantiga) return;
                     args.content = msgantiga + " `[edited]`\n" + message;
-            } catch (e) {}*/
+            } catch (e) {}
          
          
-         }
+         }*/
             
             }))
 
