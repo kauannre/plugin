@@ -9,7 +9,38 @@ const BotMessage = findByProps("createBotMessage");
 const patches = [];
 
 
+function constructMessage(message, channel) {
+    let msg = {
+        id: '',
+        type: 0,
+        content: '',
+        channel_id: channel.id,
+        author: {
+            id: '',
+            username: '',
+            avatar: '',
+            discriminator: '',
+            publicFlags: 0,
+            avatarDecoration: null,
+        },
+        attachments: [],
+        embeds: [],
+        mentions: [],
+        mention_roles: [],
+        pinned: false,
+        mention_everyone: false,
+        tts: false,
+        timestamp: '',
+        edited_timestamp: null,
+        flags: 0,
+        components: [],
+    };
 
+    if (typeof message === 'string') msg.content = message;
+    else msg = { ...msg, ...message };
+
+    return msg;
+};
 
 //const RowManager = findByName("RowManager");
 
@@ -30,7 +61,7 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
 
 patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "MessageStore"), (args: any) => {
                 
-                
+                //console.log(args)
                 try {
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].channelId, args[0].id)
                 
@@ -64,4 +95,21 @@ MessageActions.receiveMessage("1087872026796097657", msg);
 
 
 */
+
+export const onLoad = () => {
+
+        logger.log(`ativando o plugin anti delete e anti edit`);
+        FluxDispatcher.dispatch({
+            type: "MESSAGE_UPDATE",
+            message: constructMessage('PLACEHOLDER', { id: '0' }),
+        });
+        FluxDispatcher.dispatch({
+            type: "MESSAGE_UPDATE",
+            channelId: "0",
+            id: "0"
+        });
+ 
+}
+
+
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
