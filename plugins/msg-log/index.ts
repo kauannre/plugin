@@ -44,6 +44,8 @@ function constructMessage(message, channel) {
 
 //const RowManager = findByName("RowManager");
 
+const delayedStart = () => {
+    try {
 patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "MessageStore"), (args: any) => {
                 try {
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0]?.message?.channel_id, args[0]?.message.id)?.content
@@ -77,7 +79,9 @@ MessageActions.receiveMessage(args[0].channelId, msg);
             } catch (e) {}
             }));
 
-
+return null;
+    } catch (err) {}
+    }
 
 
 /*
@@ -108,8 +112,19 @@ export const onLoad = () => {
             channelId: "0",
             id: "0"
         });
- 
+        setTimeout(() => delayedStart(), 300);
 }
 
 
-export const onUnload = () => patches.forEach((unpatch) => unpatch());
+export default {
+    onLoad,
+    onUnload: () => {
+        logger.log(`Unloading ${pluginName}...`);
+        for (let unpatch of patches) {
+            unpatch();
+        };
+        logger.log(`${pluginName} unloaded.`);
+    }
+};
+
+//export const onUnload = () => patches.forEach((unpatch) => unpatch());
