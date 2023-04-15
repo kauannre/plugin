@@ -10,9 +10,11 @@ const BotMessage = findByProps("createBotMessage");
 
 const patches = [];
 
-patches.push(before(FluxDispatcher, "dispatch", ctx => {
-            const [args] = ctx.args;
-            
+patches.push(before(FluxDispatcher, "dispatch", function(ctx) => {
+
+         console.log(ctx)
+            const [args] = ctx?.args;
+            if(!args) return
          if (args.type === "MESSAGE_UPDATE") {
          try {
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args.channelid, args.id)?.content
