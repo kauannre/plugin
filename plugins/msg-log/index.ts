@@ -37,15 +37,12 @@ patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "Me
                // let message = args[0]?.message?.content;
            //     if (!message) return;
                 if (!msgantiga) return;
+                if (msgantiga.author.id == "000") return;
             
 let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: msgantiga.content});
-msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde" };
+msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde", id: "000" };
 
 MessageActions.receiveMessage(args[0].channelId, msg);
-              //  findByProps("sendBotMessage").sendBotMessage(args[0].channelId, msgantiga)
-                
-                //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
-                    
             }));
 
 
