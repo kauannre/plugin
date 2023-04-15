@@ -35,7 +35,7 @@ patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "Me
                 let msg = BotMessage.createBotMessage({channelId: args[0].message.channel_id, content: msgantiga + "[deleted]"});
 msg.author = { username: "/vibrate", avatar: "clyde" };
 
-MessageActions.receiveMessage("1087872026796097657", msg);
+MessageActions.receiveMessage(args[0].message.channel_id, msg);
                 
                 
                 //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
