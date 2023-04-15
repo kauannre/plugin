@@ -10,26 +10,12 @@ const BotMessage = findByProps("createBotMessage");
 
 const patches = [];
 
-patches.push(before(FluxDispatcher, "dispatch", (action) => {
+function dispatchWithLog(action) {
+  console.log(`Despachando ação: ${action.type}`);
+}
 
-         console.log(`${action}`)
-         /*
-            const [args] = ctx.args;
-            if(!args) return
-         if (args.type === "MESSAGE_UPDATE") {
-         try {
-                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args.channelid, args.id)?.content
-                
-                let message = args?.content;
-                if (!message) return;
-                if (!msgantiga) return;
-                    args.content = msgantiga + " `[edited]`\n" + message;
-            } catch (e) {}
-         
-         
-         }*/
-            
-            }))
+
+patches.push(before(FluxDispatcher, "dispatch",dispatchWithLog))
 
 
 
