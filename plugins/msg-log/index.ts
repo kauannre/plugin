@@ -10,7 +10,7 @@ const BotMessage = findByProps("createBotMessage");
 
 const patches = [];
 
-const RowManager = findByName("RowManager");
+//const RowManager = findByName("RowManager");
 
 patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "MessageStore"), (args: any) => {
                 try {
@@ -24,6 +24,8 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
             }));
             
 
+
+/*
 patches.push(before("actionHandler", FD.PASSIVE_UPDATE_V1?.find(i => i.name === "MessageStore"), (args: any) => {
 console.log(args)
 /*
@@ -43,7 +45,7 @@ MessageActions.receiveMessage(args[0].message.channel_id, msg);
                 //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
                     
             } catch (e) {}*/
-            }));
+      //      }));
 
 
 
