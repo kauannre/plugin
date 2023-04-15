@@ -13,7 +13,8 @@ const patches = [];
 patches.push(before(FluxDispatcher, "dispatch", function(ctx) {
 
          console.log(ctx)
-            const [args] = ctx?.args;
+         /*
+            const [args] = ctx.args;
             if(!args) return
          if (args.type === "MESSAGE_UPDATE") {
          try {
@@ -23,7 +24,7 @@ patches.push(before(FluxDispatcher, "dispatch", function(ctx) {
                 if (!message) return;
                 if (!msgantiga) return;
                     args.content = msgantiga + " `[edited]`\n" + message;
-            } catch (e) {}
+            } catch (e) {}*/
          
          
          }
