@@ -119,11 +119,11 @@ export const onLoad = () => {
 export default {
     onLoad,
     onUnload: () => {
-        logger.log(`Unloading ${pluginName}...`);
+        logger.log(`Unloading ...`);
         for (let unpatch of patches) {
             unpatch();
         };
-        logger.log(`${pluginName} unloaded.`);
+        logger.log(` unloaded.`);
     }
 };
 
