@@ -29,7 +29,7 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
 
 
 patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "MessageStore"), (args: any) => {
-                
+                try {
                 //console.log(args)
                 
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].channelId, args[0].id)
@@ -43,10 +43,25 @@ let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: ms
 msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde", id: "000" };
 
 MessageActions.receiveMessage(args[0].channelId, msg);
+} catch (e) {}
             }));
 
 
 
 
+/*
+MESSAGE_DELETE
 
+
+/eval code:const { findByProps,findByName} = vendetta.metro;
+const MessageActions = findByProps("sendMessage", "receiveMessage")
+const BotMessage = findByProps("createBotMessage");
+
+let msg = BotMessage.createBotMessage({channelId: "1087872026796097657", content: "hello"});
+msg.author = { username: "/vibrate", avatar: "clyde" };
+
+MessageActions.receiveMessage("1087872026796097657", msg);
+
+
+*/
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
