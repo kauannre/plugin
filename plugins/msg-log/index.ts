@@ -22,7 +22,7 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
                 if (!message) return;
                 if (!msgantiga) return;
                     args[0].message.content = msgantiga + " `[editada]`\n" + message;
-
+            } catch (e) {}
             }));
             
 
