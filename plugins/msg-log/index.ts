@@ -3,6 +3,10 @@ import { before, after} from "@vendetta/patcher"
 import { findByProps } from "@vendetta/metro"
 import { logger } from "@vendetta"
 const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
+const MessageActions = findByProps("sendMessage", "receiveMessage")
+const BotMessage = findByProps("createBotMessage");
+
+
 
 const patches = [];
 
@@ -18,24 +22,43 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
                     args[0].message.content = msgantiga + " `[edited]`\n" + message;
             } catch (e) {}
             }));
+            
+
+patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "MessageStore"), (args: any) => {
+           //     try {
+                
+                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
+                
+                //let message = args[0]?.message?.content;
+               // if (!message) return;
+                if (!msgantiga) return;
+                let msg = BotMessage.createBotMessage({channelId: args[0].message.channel_id, content: msgantiga + "[deleted]"});
+msg.author = { username: "/vibrate", avatar: "clyde" };
+
+MessageActions.receiveMessage("1087872026796097657", msg);
+                
+                
+                //    args[0].message.content = msgantiga + " `[edited]`\n" + message;
+                    
+          //  } catch (e) {}
+            }));
+
 
 
 
 /*
-patches.push(after("generate", RowManager.prototype, ([data], row) => {
-  if (data.rowType !== 1) return;
+MESSAGE_DELETE
 
-  const { content } = row.message as Message;
-  if (!Array.isArray(content)) return;
 
-  // Replace "oi2" with "teste2" in content
-  const newContent = content.map((c) => {
-    if (c.type === "text" && c.content === "oi2") {
-      return { type: "text", content: "teste2" };
-    }
-    return c;
-  });
-  row.message.content = newContent;
-}));
+/eval code:const { findByProps,findByName} = vendetta.metro;
+const MessageActions = findByProps("sendMessage", "receiveMessage")
+const BotMessage = findByProps("createBotMessage");
+
+let msg = BotMessage.createBotMessage({channelId: "1087872026796097657", content: "hello"});
+msg.author = { username: "/vibrate", avatar: "clyde" };
+
+MessageActions.receiveMessage("1087872026796097657", msg);
+
+
 */
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
