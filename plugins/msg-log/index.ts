@@ -10,34 +10,35 @@ const BotMessage = findByProps("createBotMessage");
 
 const patches = [];
 
-function dispatchWithLog(action) {
-  console.log(`Despachando ação: ${action.type}`);
-}
-
-
-patches.push(before(FluxDispatcher, "dispatch",dispatchWithLog))
 
 
 
 //const RowManager = findByName("RowManager");
-/*
+
 patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "MessageStore"), (args: any) => {
                 try {
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
                 
+                if (!msgantiga) return;
+                
+                let msg = BotMessage.createBotMessage({channelId: args[0].message.channel_id, content: msgantiga + "[deleted]\n"});
+msg.author = { username: "/vibrate", avatar: "clyde" };
+
+MessageActions.receiveMessage(args[0].message.channel_id, msg);
+                
                 let message = args[0]?.message?.content;
                 if (!message) return;
-                if (!msgantiga) return;
+                
                     args[0].message.content = msgantiga + " `[edited]`\n" + message;
             } catch (e) {}
             }));
             
 
-
+/*
 
 patches.push(before("actionHandler", FD.PASSIVE_UPDATE_V1, args => {
 console.log(args)
-/*
+
                 try {
                 
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
