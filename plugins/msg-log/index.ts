@@ -15,23 +15,23 @@ const patches = [];
 
 patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "MessageStore"), (args: any) => {
                 try {
-                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].message.channel_id, args[0].message.id)?.content
+                let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0]?.message?.channel_id, args[0]?.message.id)?.content
                 
                 
                 let message = args[0]?.message?.content;
                 if (!message) return;
                 if (!msgantiga) return;
                     args[0].message.content = msgantiga + " `[editada]`\n" + message;
-            } catch (e) {}
+
             }));
             
 
 
 
 patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "MessageStore"), (args: any) => {
-                try {
-                //console.log(args)
                 
+                //console.log(args)
+                try {
                 let msgantiga = findByProps("getMessage", "getMessages").getMessage(args[0].channelId, args[0].id)
                 
                // let message = args[0]?.message?.content;
@@ -43,7 +43,7 @@ let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: ms
 msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde", id: "000" };
 
 MessageActions.receiveMessage(args[0].channelId, msg);
-} catch (e) {}
+            } catch (e) {}
             }));
 
 
