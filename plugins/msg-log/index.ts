@@ -104,7 +104,7 @@ export const onLoad = () => {
             message: constructMessage('PLACEHOLDER', { id: '0' }),
         });
         FluxDispatcher.dispatch({
-            type: "MESSAGE_UPDATE",
+            type: "MESSAGE_DELETE",
             channelId: "0",
             id: "0"
         });
