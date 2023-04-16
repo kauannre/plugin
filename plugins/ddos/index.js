@@ -15,11 +15,12 @@ export default {
   // Send requests with interval
   setInterval(() => {
     for (let i = 0; i < amount; i++) {
-      let isFailedRequest = false
 
       fetch(host)
-  }, interval)
-}}
+      }
+  }, interval);
+}
+
 
 
 			this.onUnload = commands.registerCommand({
