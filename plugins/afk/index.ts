@@ -55,7 +55,7 @@ patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "Me
 let message = args[0].message;
 let guildId = args[0].guildId;
 let channelId = args[0].channelId;
-if(message.content.includes("<@" + meuid + ">") && storage.modafk && message.author.id != meuid) {
+if(message.content.includes("<@" + meuid + ">") && storage.modafk && message.author.id != meuid && message.content.includes("[MENSAGEM AUTOMÁTICA]")) {
 MessageActions.sendMessage(channelId, {
                 content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
             });
