@@ -1,4 +1,4 @@
-// some of the code taken from aeongdesu & original emnity plugin by spinfal (most of the code is from spinfal)
+
 import { registerCommand } from "@vendetta/commands"
 import { logger } from "@vendetta";
 import { findByProps } from "@vendetta/metro"
@@ -22,9 +22,8 @@ let guildId = args[0].guildId;
 let channelId = args[0].channelId;
 if(message.content.includes("<@" + meuid + ">") && storage.modafk) {
 MessageActions.sendMessage(channelId, {
-                "type": 19,
                 content: storage.afk,
-                "messageReference": {
+                "message_reference": {
         "message_id": message.id,
         "guild_id": guildId,
         "channel_id": channelId
