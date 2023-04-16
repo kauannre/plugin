@@ -57,7 +57,7 @@ let guildId = args[0].guildId;
 let channelId = args[0].channelId;
 if(message.content.includes("<@" + meuid + ">") && storage.modafk && message.author.id != meuid && !message.content.includes("[MENSAGEM AUTOMÁTICA]")) {
 
-await api.post({ url: '/channels/' + channelId + '/messages', body: { content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
+ api.post({ url: '/channels/' + channelId + '/messages', body: { content: storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
     "channel_id": channelId,
     "message_id": message.id
   }}})
