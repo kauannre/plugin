@@ -56,6 +56,7 @@ patches.push(before("actionHandler", FD.MESSAGE_UPDATE?.find(i => i.name === "Me
                 if (!message) return;
                 if (!msgantiga) return;
                     args[0].message.content = msgantiga + " `[editada]`\n" + message;
+return
             } catch (e) {}
             }));
             
@@ -78,6 +79,7 @@ msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: msg
     Avatars.BOT_AVATARS[msgantiga.author.id] = 'https://cdn.discordapp.com/avatars/'+ msgantiga.author.id + '/' + msgantiga.author.avatar + '.png';
 
 MessageActions.receiveMessage(args[0].channelId, msg);
+return
             } catch (e) {}
             }));
 
@@ -107,11 +109,11 @@ export const onLoad = () => {
 export default {
     onLoad,
     onUnload: () => {
-        logger.log(`Unloading ${pluginName}...`);
+        logger.log(`Unloading..`);
         for (let unpatch of patches) {
             unpatch();
         };
-        logger.log(`${pluginName} unloaded.`);
+        logger.log(`unloaded.`);
     }
 };
 
