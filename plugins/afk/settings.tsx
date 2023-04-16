@@ -20,12 +20,12 @@ export default () => {
             onValueChange={(value: boolean) => storage.modafk = value}
         />
             <FormSection title="Defalt Sort" titleStyleType="no_border">
-            <FormInput
-					value={storage.afk?.replace}
-					onChange={(v: string) => storage.afk?.replace = v}
-					placeholder="bar"
-					title="afk mod"
-				/>
+<FormInput
+    value={storage.afk && storage.afk.replace}
+    onChange={(v: string) => storage.afk = { ...storage.afk, replace: v }}
+    placeholder="bar"
+    title="afk mod"
+/>
             </FormSection>
     </ScrollView>
     )
