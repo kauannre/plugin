@@ -63,8 +63,6 @@ MessageActions.sendMessage(channelId, {
 }
               return  
             }));
-                        } catch (e) {}
-            }
 
 return null;
     } catch (err) {}
