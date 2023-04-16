@@ -13,7 +13,6 @@ const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
 //const Avatars = findByProps("BOT_AVATARS")
 const meuid = findByProps("getCurrentUser").getCurrentUser().id
 
-const MessageActions = findByProps("sendMessage", "receiveMessage")
 
 let patches = []
 
