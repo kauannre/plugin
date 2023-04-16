@@ -22,7 +22,7 @@ let guildId = args[0].guildId;
 let channelId = args[0].channelId;
 if(message.content.includes("<@" + meuid + ">") && storage.modafk) {
 MessageActions.sendMessage(channelId, {
-                content: "<@" + message.author.id + "> "storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
+                content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
             });
 
 }
