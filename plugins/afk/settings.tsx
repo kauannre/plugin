@@ -6,6 +6,12 @@ import { getAssetIDByName } from "@vendetta/ui/assets";
 const { ScrollView } = General;
 const { FormSection, FormRadioRow, FormSwitchRow, FormIcon, FormInput  } = Forms;
 
+let keyafk
+if (storage?.afk) {
+keyafk = storage.afk
+} else {
+keyafk = "to afk mn"
+}
 
 export default () => {
     useProxy(storage);
@@ -20,8 +26,8 @@ export default () => {
             onValueChange={(value: boolean) => storage.modafk = value}
         />
 <FormInput
-    value="lol"
-    onChange={(v: string) => storage.afk = { ...storage.afk, replace: v }}
+    value={keyafk}
+    onChange={(v: string) => storage.afk = v}
     placeholder="bar"
     title="afk mod"
 />
