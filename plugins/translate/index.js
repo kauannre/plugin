@@ -83,7 +83,7 @@ googleTranslate('Hello world!', '', 'fr').then(translation => {
             from = "pt"
             }
             
-             let traduzir = await googleTranslate(mensagem, from, to)
+             let traduzir = await googleTranslate(mensagem.value, from, to.value)
              
              if(send && send.value) {
 await MessageActions.sendMessage(ctx.channel.id, {
