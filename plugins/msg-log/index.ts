@@ -5,6 +5,7 @@ import { logger } from "@vendetta"
 const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
 const MessageActions = findByProps("sendMessage", "receiveMessage")
 const BotMessage = findByProps("createBotMessage");
+const Avatars = findByProps("BOT_AVATARS")
 
 const patches = [];
 
@@ -74,6 +75,7 @@ patches.push(before("actionHandler", FD.MESSAGE_DELETE?.find(i => i.name === "Me
             
 let msg = BotMessage.createBotMessage({channelId: args[0].channelId, content: msgantiga.content});
 msg.author = { username: msgantiga.author.username + " ANTI DELETE", avatar: "clyde", id: "000" };
+    Avatars.BOT_AVATARS[msgantiga.author.username + " ANTI DELETE"] = 'https://cdn.discordapp.com/avatars/'+ msgantiga.author.id + '/' + msgantiga.author.avatar + '.png';
 
 MessageActions.receiveMessage(args[0].channelId, msg);
             } catch (e) {}
@@ -84,21 +86,7 @@ return null;
     }
 
 
-/*
-MESSAGE_DELETE
 
-
-/eval code:const { findByProps,findByName} = vendetta.metro;
-const MessageActions = findByProps("sendMessage", "receiveMessage")
-const BotMessage = findByProps("createBotMessage");
-
-let msg = BotMessage.createBotMessage({channelId: "1087872026796097657", content: "hello"});
-msg.author = { username: "/vibrate", avatar: "clyde" };
-
-MessageActions.receiveMessage("1087872026796097657", msg);
-
-
-*/
 
 export const onLoad = () => {
 
@@ -119,11 +107,11 @@ export const onLoad = () => {
 export default {
     onLoad,
     onUnload: () => {
-        logger.log(`Unloading ...`);
+        logger.log(`Unloading ${pluginName}...`);
         for (let unpatch of patches) {
             unpatch();
         };
-        logger.log(` unloaded.`);
+        logger.log(`${pluginName} unloaded.`);
     }
 };
 
