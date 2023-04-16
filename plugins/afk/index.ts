@@ -15,7 +15,7 @@ const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
 let patches = []
 
 patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "MessageStore"), (args: any) => {
-console.log(args)
+console.log(storage.afk)
                 
             }));
             
