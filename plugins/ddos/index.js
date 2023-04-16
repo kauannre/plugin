@@ -19,7 +19,7 @@ export default {
 
       fetch(host)
   }, interval)
-}
+}}
 
 
 			this.onUnload = commands.registerCommand({
