@@ -20,7 +20,7 @@ export default () => {
             onValueChange={(value: boolean) => storage.modafk = value}
         />
 <FormInput
-    value={storage.afk && storage.afk.replace}
+    value="lol"
     onChange={(v: string) => storage.afk = { ...storage.afk, replace: v }}
     placeholder="bar"
     title="afk mod"
