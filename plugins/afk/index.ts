@@ -9,7 +9,7 @@ import { FluxDispatcher } from '@vendetta/metro/common';
 import { before, after} from "@vendetta/patcher"
 const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
 const meuid = findByProps("getCurrentUser").getCurrentUser().id
-
+const api = findByProps("get", "post");
 
 
 function constructMessage(message, channel) {
@@ -56,9 +56,16 @@ let message = args[0].message;
 let guildId = args[0].guildId;
 let channelId = args[0].channelId;
 if(message.content.includes("<@" + meuid + ">") && storage.modafk && message.author.id != meuid && !message.content.includes("[MENSAGEM AUTOMÁTICA]")) {
+
+await api.post({ url: '/channels/' + channelId + '/messages', body: { content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
+    "channel_id": channelId,
+    "message_id": message.id
+  }}})
+
+/*
 MessageActions.sendMessage(channelId, {
                 content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
-            });
+            });*/
 
 }
               return  
