@@ -51,13 +51,13 @@ let patches = []
 
 const delayedStart = () => {
     try {
-patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "MessageStore"), (args: any) => {
+patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "MessageStore"), async (args: any) => {
 let message = args[0].message;
 let guildId = args[0].guildId;
 let channelId = args[0].channelId;
 if(message.content.includes("<@" + meuid + ">") && storage.modafk && message.author.id != meuid && !message.content.includes("[MENSAGEM AUTOMÁTICA]")) {
 
- api.post({ url: '/channels/' + channelId + '/messages', body: { content: storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
+await api.post({ url: '/channels/' + channelId + '/messages', body: { content: storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
     "channel_id": channelId,
     "message_id": message.id
   }}})
