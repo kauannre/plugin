@@ -65,7 +65,7 @@ export default {
             
             
             sendEphemeralClydeMessage(ctx.channel.id, `iniciando...`)
-            await worker(host, amount, interval)
+            worker(host, amount, interval)
             
         } catch (err) {
             logger.log(err);
