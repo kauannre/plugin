@@ -12,8 +12,8 @@ export default () => {
         <ScrollView>
         <FormSection title="modo afk" titleStyleType="no_border"></FormSection>
         <FormSwitchRow
-            label="ativar afk"
-            subLabel="todas as mensagens que te mencionar vai responder com o texto."
+            label="ativar mensagem automática"
+            subLabel="todas as mensagens que te mencionar vc vai responder com o texto."
             leading={<FormIcon source={getAssetIDByName("ic_warning_24px")} />}
             value={storage.modafk}
             onValueChange={(value: boolean) => storage.modafk = value}
