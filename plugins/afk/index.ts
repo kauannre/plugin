@@ -20,8 +20,9 @@ patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "Me
 let message = args[0].message;
 let guildId = args[0].guildId;
 let channelId = args[0].channelId;
-if(message.content.includes("<@" + meuid + ">")) {
+if(message.content.includes("<@" + meuid + ">") && storage.modafk) {
 MessageActions.sendMessage(channelId, {
+                "type": 19,
                 content: storage.afk,
                 "messageReference": {
         "message_id": message.id,
@@ -45,19 +46,3 @@ export const onUnload = () => {
     for (const unregisterCommands of patches) unregisterCommands()
 }
 
-/*
-/eval code:const { findByProps,findByName} = vendetta.metro;
-const CurrentUserStore = findByProps("getCurrentUser")
-JSON.stringify(CurrentUserStore.getCurrentUser())
-
-MessageActions.sendMessage(id, {
-                content: mensagem.value,
-                "messageReference": {
-        "channel_id": "1096955219834835004",
-        "guild_id": "1096955219386052628",
-        "message_id": "1097010107910459522"
-    },
-            });
-            
-            
-*/
