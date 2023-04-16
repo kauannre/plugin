@@ -78,7 +78,7 @@ googleTranslate('Hello world!', '', 'fr').then(translation => {
             
             let to = args.find((sla) => sla.name == "toLang");
             if(from) {
-            from = id.value
+            from = from.value
             } else {
             from = "pt"
             }
