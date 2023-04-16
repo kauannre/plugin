@@ -25,7 +25,6 @@ MessageActions.sendMessage(channelId, {
                 content: storage.afk,
                 "message_reference": {
         "message_id": message.id,
-        "guild_id": guildId,
         "channel_id": channelId
     }
             });
