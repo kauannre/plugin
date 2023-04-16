@@ -21,8 +21,8 @@ export default () => {
         />
             <FormSection title="Defalt Sort" titleStyleType="no_border">
             <FormInput
-					value={storage?.afk?.replace}
-					onChange={(v: string) => storage?.afk?.replace = v}
+					value={storage.afk?.replace}
+					onChange={(v: string) => storage.afk?.replace = v}
 					placeholder="bar"
 					title="afk mod"
 				/>
