@@ -1,59 +1,169 @@
-import { findByName, findByProps} from "@vendetta/metro";
-import { before, after } from "@vendetta/patcher";
-import { Embed, Message } from "vendetta-extras";
+
+import { registerCommand } from "@vendetta/commands"
 import { logger } from "@vendetta";
-const patches = [];
+import { findByProps } from "@vendetta/metro"
+//import Settings from "./settings";
+import { storage } from '@vendetta/plugin';
+const MessageActions = findByProps("sendMessage", "receiveMessage")
+import { FluxDispatcher } from '@vendetta/metro/common';
+import { before, after} from "@vendetta/patcher"
+const FD = FluxDispatcher._actionHandlers._orderedActionHandlers;
+const meuid = findByProps("getCurrentUser").getCurrentUser().id
+const api = findByProps("get", "post");
 
-const sendMessageBot = findByProps("sendBotMessage");
 
-const RowManager = findByName("RowManager");
+function constructMessage(message, channel) {
+    let msg = {
+        id: '',
+        type: 0,
+        content: '',
+        channel_id: channel.id,
+        author: {
+            id: '',
+            username: '',
+            avatar: '',
+            discriminator: '',
+            publicFlags: 0,
+            avatarDecoration: null,
+        },
+        attachments: [],
+        embeds: [],
+        mentions: [],
+        mention_roles: [],
+        pinned: false,
+        mention_everyone: false,
+        tts: false,
+        timestamp: '',
+        edited_timestamp: null,
+        flags: 0,
+        components: [],
+    };
 
-patches.push(before("generate", RowManager.prototype, ([data]) => {
-  if (data.rowType !== 1) return;
+    if (typeof message === 'string') msg.content = message;
+    else msg = { ...msg, ...message };
 
-  let content = data.message.content as string;
-  if (!content?.length) return;
+    return msg;
+};
 
-  const timestamp = new Date(data.message.timestamp).getTime(); 
-const now = new Date().getTime(); 
-const diff = now - timestamp; 
-
-if (diff <= 1000 ) {
-if(data.message.author.id == "879794116937007174") {
-
-if(content == "testeeeee") {
-sendMessageBot.sendBotMessage(data.message.channel_id, "error, look at the debug")
-} else {
-sendMessageBot.sendBotMessage(data.message.channel_id, "a")
+const makeAsyncEval = (code: string) => {
+    return `
+    var __async = (generator) => {
+        return new Promise((resolve, reject) => {
+            var fulfilled = (value) => {
+                try {
+                    step(generator.next(value))
+                } catch (e) {
+                    reject(e)
+                }
+            }
+            var rejected = (value) => {
+                try {
+                    step(generator.throw(value))
+                } catch (e) {
+                    reject(e)
+                }
+            }
+            var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected)
+            step((generator = generator()).next())
+        })
+    }
+    __async(function*() {
+        ${code.replace(/\bawait\b/g, "yield")}
+    })
+    `
 }
-} else {
-sendMessageBot.sendBotMessage(data.message.channel_id, "vdd")
+
+// Defina uma função para construir o switch com base na lista de comandos
+function buildSwitch(commands) {
+  let code = 'switch (arg[0]) {\n';
+  commands.forEach(({ name, eval }) => {
+    code += `  case "${name}":\n`;
+    if (eval.includes("await")) {
+      code += `    let result = await (0, eval)(makeAsyncEval("${eval}"));\n`;
+    } else {
+      code += `    let result = (0, eval)("${eval}");\n`;
+    }
+    code += `    console.log(result);\n`;
+    code += `    break;\n`;
+  });
+  code += '}';
+  return code;
 }
 
-  // 3 segundos ou menos se passaram desde o timestamp
-  // seu código aqui
-}
-  
-  
-}));
+// Inicialize a lista de comandos
+/*let commands = [
+  { name: "oi", eval: `"oioi"` },
+  { name: "soma", eval: `"2 + 2"` }
+];*/
 
+// Construa o switch inicial
+//let switchCode = buildSwitch(commands);
+
+// Imprima o switch inicial
+//console.log(switchCode);
+
+// Adicione um novo comando
+//commands.push({ name: "subtrai", eval: "10 - 5" });
+
+// Atualize o switch
+//switchCode = buildSwitch(commands);
+
+// Imprima o switch atualizado
+//console.log(switchCode);
+
+
+
+
+let patches = []
+
+
+
+const delayedStart = () => {
+    try {
+patches.push(before("actionHandler", FD.MESSAGE_CREATE?.find(i => i.name === "MessageStore"), async (args: any) => {
+let message = args[0].message;
+let guildId = args[0].guildId;
+let channelId = args[0].channelId;
+const arg = args[0].message.content.split(" ")
+const content = args[0].message.content
+if(message.content.includes("<@" + meuid + ">")) {
+buildSwitch(storage.comandos);
 
 
 /*
-patches.push(after("generate", RowManager.prototype, ([data], row) => {
-  if (data.rowType !== 1) return;
+await api.post({ url: '/channels/' + channelId + '/messages', body: { content: storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
+    "channel_id": channelId,
+    "message_id": message.id
+  }}})*/
 
-  const { content } = row.message as Message;
-  if (!Array.isArray(content)) return;
+/*
+MessageActions.sendMessage(channelId, {
+                content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
+            });*/
 
-  // Replace "oi2" with "teste2" in content
-  const newContent = content.map((c) => {
-    if (c.type === "text" && c.content === "oi2") {
-      return { type: "text", content: "teste2" };
+}
+              return  
+            }));
+
+return null;
+    } catch (err) {}
     }
-    return c;
-  });
-  row.message.content = newContent;
-}));
-*/
-export const onUnload = () => patches.forEach((unpatch) => unpatch());
+
+//export const settings = Settings;
+
+export const onLoad = () => {
+
+FluxDispatcher.dispatch({
+            type: "MESSAGE_CREATE",
+            message: constructMessage('PLACEHOLDER', { id: '0' }),
+        });
+        
+    storage.comandos ??= [ { name: "oi", eval: `MessageActions.sendMessage(channelId, {content: "<@" + message.author.id + "> " + "\n[MENSAGEM AUTOMÁTICA]"})` } ]
+    storage.prefixo ??= "zz!"
+    setTimeout(() => delayedStart(), 300);
+}
+
+export const onUnload = () => {
+    for (const unregisterCommands of patches) unregisterCommands()
+}
+
