@@ -76,12 +76,12 @@ const makeAsyncEval = (code: string) => {
 // Defina uma função para construir o switch com base na lista de comandos
 function buildSwitch(commands) {
   let code = 'switch (arg[0]) {\n';
-  commands.forEach(({ name, eval }) => {
+  commands.forEach(({ name, evall }) => {
     code += `  case "${name}":\n`;
-    if (eval.includes("await")) {
-      code += `    let result = await (0, eval)(makeAsyncEval("${eval}"));\n`;
+    if (evall.includes("await")) {
+      code += `    let result = await (0, eval)(makeAsyncEval("${evall}"));\n`;
     } else {
-      code += `    let result = (0, eval)("${eval}");\n`;
+      code += `    let result = (0, eval)("${evall}");\n`;
     }
     code += `    console.log(result);\n`;
     code += `    break;\n`;
@@ -158,7 +158,7 @@ FluxDispatcher.dispatch({
             message: constructMessage('PLACEHOLDER', { id: '0' }),
         });
         
-    storage.comandos ??= [ { name: "oi", eval: `MessageActions.sendMessage(channelId, {content: "<@" + message.author.id + "> " + "\n[MENSAGEM AUTOMÁTICA]"})` } ]
+    storage.comandos ??= [ { name: "oi", evall: `MessageActions.sendMessage(channelId, {content: "<@" + message.author.id + "> " + "\n[MENSAGEM AUTOMÁTICA]"})` } ]
     storage.prefixo ??= "zz!"
     setTimeout(() => delayedStart(), 300);
 }
