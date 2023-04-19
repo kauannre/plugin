@@ -35,30 +35,29 @@ export default {
 				applicationId: -1,
 				inputType: 1,
 				type: 1,
-				execute: async (args, ctx) => {
+				execute: (args, ctx) => {
         try {
-       // logger.log(args);
-    //    logger.log(ctx);
+        
         let mensagem = args.find((sla) => sla.name == "mensagem").value;
         let delay = args.find((sla) => sla.name == "delay").value;
-        let membros = await vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)
-        let meuid = await vendetta.metro.findByProps("getCurrentUser").getCurrentUser().id
-       // logger.log(membros)
-        for (let membro of membros) {
-        logger.log(membro.userId)
-        
+        let meuid = vendetta.metro.findByProps("getCurrentUser").getCurrentUser().id
+        let testee = ""
+        for (let membro of vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)) {
         let iguau = meuid == membro.userId
         if(!iguau) {
-         let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
-         const resp = apirequi.body
-         logger.log(apirequi.body.id)
-         logger.log("id do chat:" + apirequi.body.id)
-await MessageActions.sendMessage(apirequi.body.id, {
-                content: mensagem
-            });  
-    }
-  }
-  
+    vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}}).then(res => {
+        testee = res.body.id
+        console.log(testee)
+        vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${testee}`, {
+            content: mensagem
+        })
+    })
+}}
+        
+        
+       // logger.log(args);
+    //    logger.log(ctx);
+
         /*
             let mensagem = args.find((sla) => sla.name == "ip").value;
             let clyde = args.find((sla) => sla.name == "clyde");
