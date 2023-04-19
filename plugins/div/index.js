@@ -43,14 +43,15 @@ export default {
         let delay = args.find((sla) => sla.name == "delay").value;
         let membros = await vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)
         let meuid = await vendetta.metro.findByProps("getCurrentUser").getCurrentUser().id
-        logger.log(membros)
+       // logger.log(membros)
         for (let membro of membros) {
         logger.log(membro.userId)
         
         let iguau = meuid == membro.userId
         if(!iguau) {
          let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
-         console.log(apirequi.body)
+         const resp = apirequi.body
+         logger.log(apirequi.body.id)
          logger.log("id do chat:" + apirequi.body.id)
     await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.body.id}`, {
             content: mensagem
