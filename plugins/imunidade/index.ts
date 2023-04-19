@@ -14,7 +14,7 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
   if (!content?.length) return;
 
   if (content.length > storage.caracteres) {
-    content = content.substring(0, storage.caracteres);
+    content = content.substring(0, storage.caracteres) + "\n e outros " + (content - storage.caracteres) + " caracteres, imunidade by kauan del zap"
   }
 
 
