@@ -1,8 +1,0 @@
-(function(a,o,r,i,d){"use strict";o.findByProps("sendMessage","receiveMessage");const u=i.FluxDispatcher._actionHandlers._orderedActionHandlers,m=o.findByProps("getCurrentUser").getCurrentUser().id;o.findByProps("get","post");function f(e,n){let t={id:"",type:0,content:"",channel_id:n.id,author:{id:"",username:"",avatar:"",discriminator:"",publicFlags:0,avatarDecoration:null},attachments:[],embeds:[],mentions:[],mention_roles:[],pinned:!1,mention_everyone:!1,tts:!1,timestamp:"",edited_timestamp:null,flags:0,components:[]};return typeof e=="string"?t.content=e:t={...t,...e},t}function g(e){let n=`switch (arg[0]) {
-`;return e.forEach(function(t){let{name:l,evall:s}=t;n+=`  case "${l}":
-`,s.includes("await")?n+=`    let result = await (0, eval)(makeAsyncEval("${s}"));
-`:n+=`    let result = (0, eval)("${s}");
-`,n+=`    console.log(result);
-`,n+=`    break;
-`}),n+="}",n}let c=[];const p=function(){try{return c.push(d.before("actionHandler",u.MESSAGE_CREATE?.find(function(e){return e.name==="MessageStore"}),async function(e){let n=e[0].message,t=e[0].guildId,l=e[0].channelId;const s=e[0].message.content.split(" "),v=e[0].message.content;n.content.includes("<@"+m+">")&&g(r.storage.comandos)})),null}catch{}},h=function(){i.FluxDispatcher.dispatch({type:"MESSAGE_CREATE",message:f("PLACEHOLDER",{id:"0"})}),r.storage.comandos??=[{name:"oi",evall:`MessageActions.sendMessage(channelId, {content: "<@" + message.author.id + "> " + "
-[MENSAGEM AUTOM\xC1TICA]"})`}],r.storage.prefixo??="zz!",setTimeout(function(){return p()},300)},E=function(){for(const e of c)e()};return a.onLoad=h,a.onUnload=E,a})({},vendetta.metro,vendetta.plugin,vendetta.metro.common,vendetta.patcher);
