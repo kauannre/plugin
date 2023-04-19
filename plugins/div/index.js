@@ -37,12 +37,14 @@ export default {
 				type: 1,
 				execute: async (args, ctx) => {
         try {
-        logger.log(args);
-        logger.log(ctx);
+       // logger.log(args);
+    //    logger.log(ctx);
         let mensagem = args.find((sla) => sla.name == "mensagem").value;
         let delay = args.find((sla) => sla.name == "delay").value;
-        
-        for (let membro of vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)) {
+        let membros = await vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)
+        logger.log(membros)
+        for (let membro of membros) {
+        logger.log(membro.userId)
         let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
         
     await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
