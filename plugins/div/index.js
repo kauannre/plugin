@@ -53,10 +53,10 @@ export default {
          const resp = apirequi.body
          logger.log(apirequi.body.id)
          logger.log("id do chat:" + apirequi.body.id)
-    await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.body.id}`, {
+    await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(apirequi.body.id, {
             content: mensagem
         })
-    await new Promise(resolve => setTimeout(resolve, delay));
+    
     }
   }
   
