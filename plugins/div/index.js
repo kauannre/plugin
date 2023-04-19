@@ -49,7 +49,7 @@ export default {
         
         if(vendetta.metro.findByProps("getCurrentUser").getCurrentUser().id != membro.userId) {
          let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
-         logger.log("id do chat:"apirequi.id)
+         logger.log("id do chat:" + apirequi.id)
     await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
             content: mensagem
         })
