@@ -46,6 +46,7 @@ export default {
         for (let membro of membros) {
         logger.log(membro.userId)
         let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
+        logger.log("id do chat:"apireq.id)
         
     await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
             content: mensagem
