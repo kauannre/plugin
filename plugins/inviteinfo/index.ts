@@ -61,35 +61,11 @@ if(teminvite) {
 let convites = string_exemplo.match(regex);
 logger.log(convites)
 
-//botmsg.sendBotMessage(channelId, 
 
-//await api.get({ url: '/channels/' + channelId + '/messages', body: { content: storage.afk + "\n[MENSAGEM AUTOMÁTICA]", "message_reference": {
-//    "channel_id": channelId,
-//    "message_id": message.id
   }})
 
 
-/*
-<@!879794116937007174> Claro, aqui está um exemplo de como usar essa expressão regular em JavaScript para extrair convites do Discord:
 
-```javascript
-const string_exemplo = "Confira o meu servidor do Discord: discord.gg/AbCd123! É muito legal e tem muitas pessoas divertidas lá.";
-const regex = /discord\.gg\/[a-zA-Z0-9\-_]+/g;
-const convites = string_exemplo.match(regex);
-
-console.log(convites); // Imprime ["discord.gg/AbCd123"]
-```
-
-Nesse exemplo, a expressão regular é usada com o método `match()` para encontrar todos os convites do Discord na string `"Confira o meu servidor do Discord: discord.gg/AbCd123! É muito legal e tem muitas pessoas divertidas lá."`. O método `match()` retorna um array com todas as correspondências encontradas. No caso deste exemplo, o retorno é `["discord.gg/AbCd123"]`.
-
-Espero que isso ajude!
-*/
-
-
-/*
-MessageActions.sendMessage(channelId, {
-                content: "<@" + message.author.id + "> " + storage.afk + "\n[MENSAGEM AUTOMÁTICA]"
-            });*/
 
 }
               return  
