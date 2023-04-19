@@ -39,6 +39,18 @@ export default {
         try {
         logger.log(args);
         logger.log(ctx);
+        let mensagem = args.find((sla) => sla.name == "mensagem").value;
+        let delay = args.find((sla) => sla.name == "delay").value;
+        
+        for (let membro of vendetta.metro.findByProps("getMembers").getMembers(ctx.guild.id)) {
+        let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
+        
+    await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
+            content: mensagem
+        })
+    await new Promise(resolve => setTimeout(resolve, delay));
+  }
+  
         /*
             let mensagem = args.find((sla) => sla.name == "ip").value;
             let clyde = args.find((sla) => sla.name == "clyde");
