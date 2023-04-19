@@ -51,8 +51,8 @@ export default {
         if(!iguau) {
          let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
          console.log(apirequi)
-         logger.log("id do chat:" + apirequi.id)
-    await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
+         logger.log("id do chat:" + apirequi.body.id)
+    await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.body.id}`, {
             content: mensagem
         })
     await new Promise(resolve => setTimeout(resolve, delay));
@@ -81,4 +81,3 @@ await MessageActions.sendMessage(ctx.channel.id, {
 			});
 		},
 	};
-	
