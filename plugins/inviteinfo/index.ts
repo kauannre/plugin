@@ -58,7 +58,7 @@ const delayedStart = () => {
 
     const teminvite = regex.test(message.content)
 
-    if (teminvite) {
+    if (!teminvite) {
       let convites = string_exemplo.match(regex);
       logger.log(convites)
     }
