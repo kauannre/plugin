@@ -1,7 +1,8 @@
 import { findByName } from "@vendetta/metro";
 import { before, after } from "@vendetta/patcher";
 import { Embed, Message } from "vendetta-extras";
-
+import { storage } from '@vendetta/plugin';
+import Settings from "./settings";
 const patches = [];
 
 const RowManager = findByName("RowManager");
@@ -12,37 +13,17 @@ patches.push(before("generate", RowManager.prototype, ([data]) => {
   let content = data.message.content as string;
   if (!content?.length) return;
 
-  // Replace "oi" with "teste" in content
-  //content = content.replace(/oi/g, "teste");
-  const tamanho = content.length;
-// Check if content length is greater than 500
-if (content.length > 500) {
-  content = content.substring(0, 500) + "\n\ne outros " + (tamanho - 500) + " caracteres, imunidade by Kauan del zap";
-}
-
-  
+  if (content.length > storage.caracteres) {
+    content = content.substring(0, storage.caracteres);
+  }
 
 
   data.message.content = content;
 }));
 
+export const settings = Settings;
+export const onLoad = () => {
+    storage.caracteres ??= "500"
+}
 
-
-/*
-patches.push(after("generate", RowManager.prototype, ([data], row) => {
-  if (data.rowType !== 1) return;
-
-  const { content } = row.message as Message;
-  if (!Array.isArray(content)) return;
-
-  // Replace "oi2" with "teste2" in content
-  const newContent = content.map((c) => {
-    if (c.type === "text" && c.content === "oi2") {
-      return { type: "text", content: "teste2" };
-    }
-    return c;
-  });
-  row.message.content = newContent;
-}));
-*/
 export const onUnload = () => patches.forEach((unpatch) => unpatch());
