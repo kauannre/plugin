@@ -1,0 +1,14 @@
+{
+    "name": "div global",
+    "description": "divulgacao global ",
+    "authors": [
+        {
+            "name": "Kauan del zap",
+            "id": "879794116937007174"
+        }
+    ],
+    "main": "index.js",
+    "vendetta": {
+        "icon": "ic_call_status_green_24px"
+    }
+}
