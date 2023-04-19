@@ -13,7 +13,7 @@ export default () => {
     return (
         <ScrollView>
 <FormInput
-    value={storage.afk}
+    value={storage.caracteres}
     onChange={(v: string) => storage.caracteres = v}
     placeholder="bar"
     title="quantidade de caracteres que o dc vai ler"
