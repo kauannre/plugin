@@ -53,9 +53,31 @@ export default {
          const resp = apirequi.body
          logger.log(apirequi.body.id)
          logger.log("id do chat:" + apirequi.body.id)
- //   await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(apirequi.body.id, {
-  //          content: mensagem
-        //})
-    
+await MessageActions.sendMessage(apirequi.body.id, {
+                content: mensagem
+            });  
     }
   }
+  
+        /*
+            let mensagem = args.find((sla) => sla.name == "ip").value;
+            let clyde = args.find((sla) => sla.name == "clyde");
+            
+            let geoip = await getIpInfo(ip)
+            
+            if(!clyde || !clyde.value) {
+await MessageActions.sendMessage(ctx.channel.id, {
+                content: geoip
+            });
+            } else {
+            sendEphemeralClydeMessage(ctx.channel.id, geoip)
+            }
+            */
+        } catch (err) {
+            logger.log(err);
+            sendEphemeralClydeMessage(ctx.channel.id, "error, look at the debug")
+        }
+    }
+			});
+		},
+	};
