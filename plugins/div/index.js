@@ -50,6 +50,7 @@ export default {
         let iguau = meuid == membro.userId
         if(!iguau) {
          let apirequi = await vendetta.metro.findByProps("get", "post").post({ url: '/users/@me/channels', body: {"recipients":[membro.userId]}})
+         console.log(apirequi)
          logger.log("id do chat:" + apirequi.id)
     await vendetta.metro.findByProps("sendMessage", "receiveMessage").sendMessage(`${apirequi.id}`, {
             content: mensagem
@@ -80,3 +81,4 @@ await MessageActions.sendMessage(ctx.channel.id, {
 			});
 		},
 	};
+	
