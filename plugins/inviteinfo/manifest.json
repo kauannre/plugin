@@ -1,0 +1,14 @@
+{
+    "name": "inviteInfo",
+    "description": " Get infos of all invites",
+    "authors": [
+        {
+            "name": "Kauan del zap",
+            "id": "879794116937007174"
+        }
+    ],
+    "main": "index.js",
+    "vendetta": {
+        "icon": "ic_call_status_green_24px"
+    }
+}
